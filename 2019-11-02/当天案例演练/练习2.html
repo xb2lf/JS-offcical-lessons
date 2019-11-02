@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var obj = {
+        val:2,
+        dbl:function(){
+            var val =45;
+            console.log(this);// obj
+            this.val *= 2;
+            console.log(val); // 45
+            console.log(this.val); //4
+        }
+    }
+    var ff = obj.dbl(); //obj 45 4
+    var fn = obj.dbl;// 
+    fn(); // => window.fn()   window 45  NaN
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+          形参赋值： ''
+          **************
+          预解析
+          var a 
+          a = function a() {};
+          b = function b() {}
+          var c
+          **************
+          执行上下文
+          function a() {}
+          a = 5
+          b = 6
+          c = d = b
+         */
+    +function() {
+        console.log(a);// function a() {};
+        var a = 5;
+        function a() {};
+        console.log(a); //5
+        function b() {};
+        b = 6;
+        console.log(b); //6
+        var c = d = b; // var c = b = 6  window.d = b = 6
+    }()
+    console.log(d); // 6
+    console.log(c); // 报错  
+    </script>
+</body>
+</html>

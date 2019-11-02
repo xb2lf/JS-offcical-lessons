@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    /* 
+    window.onload 当页面的所有静态资源加载完成之后才执行里面的函数
+     */
+     window.onload = function() {
+       var btn = document.getElementById('btn');
+       var i = 0;
+       btn.onclick = function() {
+         alert(i);
+         i = null;
+       }
+
+       btn2.onclick = function() {
+      console.dir(btn.onclick)
+    }
+       console.dir(btn.onclick);
+
+        //  window.onload = function() {
+    //    var btn = document.getElementById('btn');
+    //    var i = 0;
+    //    btn.onclick = function() {
+    //      alert(i);
+    //      btn.onclick = null;
+    //    }
+    //  }
+     }
+     
+   
+  
+    </script>
+</head>
+<body>
+  <button id="btn">按钮1</button>
+  <button id= "btn2">按钮2</button>
+  <button>按钮3</button>
+    <script>
+  
+  /* 
+  window.onload
+   */
+    </script>
+</body>
+</html>

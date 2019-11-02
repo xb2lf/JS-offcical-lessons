@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变量提升</title>
+</head>
+<body>
+    
+    <script>
+        /* 
+         *    var a
+         *    var a  = 10;
+         *    function a() {
+         *    var b = 30;
+         *    alert(5);
+         *     }
+         */
+    alert(a); // 空函数
+    var a  = 10;
+    function a() {
+        var b = 30;
+        alert(5);
+    };
+  function a() {
+
+  };
+    alert(a); //10
+    </script>
+</body>
+</html>
