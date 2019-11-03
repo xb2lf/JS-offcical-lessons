@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var b = 20;// 声明一个全局变量b  相当于window.b
+    alert(a);// a未声明 报错a is not defined
+    alert(1);// 上边报错就不再执行了
+    </script>
+    <script>
+    //如果有多个script标签，上一个script标签报错是不会影响下面script中的代码执行的
+    alert(b); // 20  查找的方式，先看当前的script有没有，没有还会去上一个script标签中查找（不会往下找），如果确实找不到那就报错
+    console.log(window);
+    var a = 10;
+    function a() {};
+    </script>
+</body>
+</html>

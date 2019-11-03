@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="baidu.css" />
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="baidu">
+				<ul id="list">
+					<li>
+						<div></div>
+						<span>泡沫</span>
+						<span>邓紫棋</span>
+					</li>
+					<li>
+						<div></div>
+						<span>说爱你</span>
+						<span>蔡依林</span>
+					</li>
+					<li>
+						<div></div>
+						<span>稻香</span>
+						<span>周杰伦</span>
+					</li>
+					<li>
+						<div></div>
+						<span>我的梦</span>
+						<span>张靓颖</span>
+					</li>
+					<li>
+						<div></div>
+						<span>怎么说我不爱你</span>
+						<span>萧敬腾</span>
+					</li>
+					<li>
+						<div></div>
+						<span>无处安放</span>
+						<span>白若溪</span>
+					</li>
+				</ul>
+				<div class="select">
+					<span class="selectAll" id="selectAll"></span><span>全选</span>
+					<div class="others">
+						<span><em></em>收藏</span>
+						<span><em></em>添加</span>
+						<span><em></em>删除</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			let list = document.querySelectorAll("#list li");
+			let  divList = document.querySelectorAll("#list li>div");
+			let selectAll = document.getElementById('selectAll');
+			let divAry = [];
+			for(let i = 0; i < list.length; i ++) {
+				list[i].style.backgroundColor = i%2 === 0 ? '#fff' : 'pink';
+				let color = null;
+			list[i].onmouseover = function() {
+				if(divList[i].innerHTML !== '√') {
+					color = this.style.backgroundColor; 
+				this.style.backgroundColor = 'lightskyblue';
+				}
+			}
+			list[i].onmouseout = function() {
+				if(divList[i].innerHTML !== '√'){
+					this.style.backgroundColor =color;
+				}else if(divList[i].innerHTML === '√'){
+                    this.style.backgroundColor = 'lightgreen'
+				}
+			}
+			divAry[i] = false;
+		    list[i].onclick = function() {
+				if(divList[i].innerHTML !== '√') {
+				this.style.backgroundColor = color ? 'lightgreen' : null;
+				divList[i].innerHTML = '√';
+				divAry[i] = true;
+				}else{ 
+					list[i].style.backgroundColor = i%2 === 0 ? '#fff' : 'pink';
+					divList[i].innerHTML = '';
+					divAry[i] = false;
+				};
+				if(divAry.every (item=>item == true)) {
+                    selectAll.innerHTML = '√';
+				}else{
+					selectAll.innerHTML = '';
+				};
+			}
+			}
+			selectAll.onclick = function() {
+				if(selectAll.innerHTML !== '√') {
+					selectAll.innerHTML = '√';
+					for(let j = 0; j < divList.length;j++) {
+						divList[j].innerHTML= '√';
+						divAry[j] = true;
+						list[j].style.backgroundColor = 'lightgreen';
+					}
+				}else if(selectAll.innerHTML === '√') {
+					selectAll.innerHTML = '';
+					for(let j = 0; j < divList.length; j++) {
+						divList[j].innerHTML= '';
+						divAry[j] = false;
+						list[j].style.backgroundColor = j%2 === 0 ? '#fff' : 'pink';
+					}
+				}
+			}
+			 
+            
+		</script>
+	</body>
+
+</html>

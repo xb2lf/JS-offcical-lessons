@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 局部作用域 
+       形参赋值
+          无
+       预解析
+          var a
+          function fn(){a=30;};
+       执行上下文
+          a = 20;
+          fn(); // a = 30
+          console.log(a);// 30
+    */
+     var a = 20;
+     function fn() {// 在函数内开辟一个私有执行栈
+         a = 30;// 如果没有用关键字声明变量作用域，就会向外寻找，在这里等同于window.a
+     }
+     fn();
+     console.log(a);
+    </script>
+</body>
+</html>

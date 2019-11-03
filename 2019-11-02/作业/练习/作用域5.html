@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 局部作用域 
+
+       预解析
+
+       执行上下文
+
+    */
+     var a = 20;
+     function fn() {// 在函数内开辟一个私有执行栈
+         function f() {
+        var a = 50;
+        console.log(a); // 50
+         }
+         f();
+     }
+     fn();
+     console.log(a);// 20
+    </script>
+</body>
+</html>

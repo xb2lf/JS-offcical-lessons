@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 局部作用域 
+       形参赋值
+          无
+       预解析
+   
+       执行上下文
+       
+    */
+     var a = 20;
+     function fn() {// 在函数内开辟一个私有执行栈
+         function f() {
+        //   如果局部作用域中没有变量（var let)、函数、形参的时候，就会查找函数外面的变量，直到window为止（这种机制叫做作用域链（Scope Chain）
+        console.log(a); // 20
+         }
+         f();
+     }
+     fn();
+    </script>
+</body>
+</html>

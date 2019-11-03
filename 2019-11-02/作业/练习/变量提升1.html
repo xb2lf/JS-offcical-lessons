@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+         * 形参赋值
+         *    无
+         * 预解析
+         *    var a
+         *    function a() {
+         *      var b = 30;
+         *       alert(5);
+         *        }
+         *    function a() {};
+         * 执行上下文
+              alert(a);// function a() {}
+         *    a = 10;
+         *    alert(a); // 10
+         */
+    alert(a);
+    var a = 10;
+    function a() {
+        var b = 30;
+        alert(5);
+    }
+   function a() {};
+    alert(a);
+    </script>
+</body>
+</html>
