@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+/* 
+原始值
+            存储在栈（stack）中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。
+引用值
+            存储在堆（heap）中的对象，也就是说，存储在变量处的值是一个指针（point），指向存储对象的内存处。
+
+var 、 let
+const
+
+var:
+   当通过var创建一个变量的时候，会进行预解析（变量提升）
+   因为var会预解析，所以变量会当作属性存到全局的活动变量对象下（window下）
+   不支持块级作用域
+   不会主动储存每次循环的值
+  
+let:
+   当通过let创建一个变量的时候，不会进行预解析（不会变量提升）
+   不会在window下挂属性
+   在定义变量之前访问这个变量，之前访问的空间叫做暂存死区
+   支持块级作用域
+   会把每次循环的值储存起来
+   不能声明同名的变量、函数、参数
+
+块：{}
+    类似封闭空间
+    在块套块中，子块有函数，如果在父块或者父块的上方去访问这个函数，返回值都是nudefined
+
+    如果在子块的下方访问这个函数，就能找到这个函数
+
+const: 常量（不可变的量）
+    当声明一个变量不允许可变的时候就是用const来定义
+    不能声明同名的变量
+
+    注意：const赋值的数据，它只会监控这个数据的地址()
+
+    const box = document.getElementById('box');
+
+js是一个弱类型语言
+ */
+ 
+ var a = 10; // 相当于window.a = 10
+ console.log(a); //10
+    </script>
+</body>
+</html>

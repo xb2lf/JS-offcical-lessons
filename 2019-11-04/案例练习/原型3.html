@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    function Person(name,age,sex) { // 归类 构造函数（构造对象的函数）
+        // let obj = {}; // this {}
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        // return obj;
+        // this.say = function() {
+        //     alert('我叫' + this.name);
+        // }
+    }
+    Person.prototype.say =  function() {
+            alert('我叫' + this.name);
+        };
+    // let p1 =  Person('赵炎',24,'男'); 
+    let p1 = new Person('赵炎',24,'男');// p1实例 Person{age: 24,name: "赵炎",sex: "男"}
+    let p2 = new Person('冉德鹏',118,'男');// p2实例
+    p1.say();
+    p2.say();
+    console.log(p1 == p2); // false
+    console.log(p1.say == p2.say); //true
+    console.log(p1);
+    </script>
+</body>
+</html>

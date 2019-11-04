@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    在js中，所有的class（类）都是函数模拟出来的
+
+    当声明一个函数的时候，这个函数自身有一些属性或者方法（天生自带的），其中有一个属性叫做prototype，它的值为**对象**
+    这个prototype就叫做原型,也就是说函数身上才有原型
+
+    *** 函数原型下的属性或者方法只给它（构造函数）的实例化对象使用 ***
+     */
+    Object.prototype.say = 10;
+   let obj = new Object;
+   console.log(obj.say); // 10
+    </script>
+</body>
+</html>

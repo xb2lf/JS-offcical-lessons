@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    在js中，所有的class（类）都是函数模拟出来的
+
+    当声明一个函数的时候，这个函数自身有一些属性或者方法（天生自带的），其中有一个属性叫做prototype，它的值为**对象**
+    这个prototype就叫做原型,也就是说函数身上才有原型
+
+    *** 函数原型下的属性或者方法只给它（构造函数）的实例化对象使用 ***
+
+    原型链:
+         __proto__ 实例化对象都有__proto__ ,
+         这个属性全等于 实例的构造函数的原型
+     */
+function fn() {
+}
+fn.prototype.say = 10; // 属性
+fn.prototype.aa = function() {} // 方法
+let f = new fn;
+
+/* 
+f.say => f. __proto__ => fn.prototype
+ */
+console.log(f.say); //10
+console.log(f.__proto__.say); // 10
+console.dir(f);// __proto__: Object
+console.log(f.__proto__ === fn.prototype);// true
+  
+    </script>
+</body>
+</html>

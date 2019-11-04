@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    单例模式：
+        单例：单独的实例
+
+    构造函数和实例
+
+        实例：描述具体的是一个事务    倪老师（具体）
+        构造函数：抽象一个类的封装过程 老师（教书育人...）
+    原始值和引用值
+
+    原始值： 字符串、数字、布尔值...
+    引用类型（里面放着很多的原始值和引用值）：
+
+    高级单例模式：
+        
+
+     */
+    let name = '珠峰';
+    let  age = 10;
+    let ip = '回龙观东大街';
+    let name2 = '孟记粥铺';
+    let age2 = 5;
+    let ip2 = '回龙观东大街';
+
+    // 对象（实例）
+    let obj = {
+        name:'珠峰',
+        age:10,
+        ip: '回龙观东大街'
+    }
+    console.log(obj);
+
+
+    // 高级单例模式
+    let obj2 =(function () {
+        let name = '珠峰';
+        let  age = 10;
+        let ip = '回龙观东大街';
+        function sum() {
+            for (let i = 0; i < 10; i++) {
+                age++;
+                
+            }
+            return age
+        }
+        sum();
+        console.log(age); // 20
+        return {
+            name:name,
+            ip:ip,
+            sum:sum
+        }
+    })();
+    console.log(obj2); // obj2 { name:'珠峰',ip:'回龙观东大街',sum:ƒ sum()}
+    </script>
+</body>
+</html>

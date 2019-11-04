@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+/* 
+var 、 let
+const
+
+var:
+   当通过var创建一个变量的时候，会进行预解析（变量提升）
+   因为var会预解析，
+  
+let:
+   当通过let创建一个变量的时候，不会进行预解析（不会变量提升）
+   在定义变量之前访问这个变量，之前访问的空间叫做暂存死区
+ */
+ let a = 10;
+ console.log(window.a); // undefined
+    </script>
+</body>
+</html>

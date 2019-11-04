@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        单例模式：
+            单例：单独的实例
+    
+            obj  ={
+                name:'xxx'
+            }
+    
+        构造函数和实例
+    
+            实例：描述具体的是一个事务    倪老师（具体）
+            构造函数：抽象一个类的封装过程 老师（教书育人...）
+        原始值和引用值
+    
+        原始值： 字符串、数字、布尔值...
+        引用类型（里面放着很多的原始值和引用值）：
+    
+        高级单例模式：
+            让当前这个实例功能更加强大,还可以隐藏或者暴露细节信息,形成模块化编程
+            解决了命名冲突的问题
+            (function(){
+                function sum() {
+                }
+                return {
+                }
+            })();
+        高级单例模式需要知道哪些东西：
+        1.为什么要用高级单例模式
+            让当前这个实例功能更加强大，还可以隐藏或者暴露细节信息
+        
+        2.高级实例模式如何写
+        (function () {
+            return{
+    
+            }
+        })();
+        最后让一个变量去接收这个功能强大的对象
+    
+        解决命名冲突的问题：
+        1.封闭空间 （把变量或者函数放到函数中）
+        let a = 10;
+        (function () {
+            let a = 20
+        })();
+        2.命名空间
+        // let name = 10;
+           obj.name
+        // let name = 20;
+           obj2.name
+    
+    
+    
+        // {} -> Object [] -> Array '' -> new String()
+         */
+        let name = '珠峰';
+        let age = 10;
+        let ip = '回龙观东大街';
+        let name2 = '孟记粥铺';
+        let age2 = 5;
+        let ip2 = '回龙观东大街';
+
+        // 对象（实例）
+        let obj = {
+            name: '珠峰',
+            age: 10,
+            ip: '回龙观东大街'
+        }
+        console.log(obj);
+
+
+        // 高级单例模式
+        let obj2 = (function () {
+            let name = '珠峰';
+            let age = 10;
+            let ip = '回龙观东大街';
+            return {
+                name: name,
+                ip: ip
+            }
+        })();
+        console.log(obj2);
+    </script>
+</body>
+
+</html>

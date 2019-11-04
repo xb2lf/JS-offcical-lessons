@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <script>
+/* 
+var 、 let
+const
+
+var:
+   当通过var创建一个变量的时候，会进行预解析（变量提升）
+   因为var会预解析，
+  
+let:
+   当通过let创建一个变量的时候，不会进行预解析（不会变量提升）
+   在定义变量之前访问这个变量，之前访问的空间叫做暂存死区
+ */
+ let btns = document.querySelectorAll('button');
+ for (let i = 0; i < btns.length; i++) {
+     btns[i].onclick = function() {
+        alert(i);
+     }
+     
+ }
+// fn(i);
+
+//  function fn(i) {
+//     btns[i].oncick = function() {
+//         alert(i);
+//      }
+//  }
+  
+    </script>
+</body>
+</html>
