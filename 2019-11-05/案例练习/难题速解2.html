@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        预解析
+
+        Foo = function() {}
+        var getName
+        getName = function() {}
+        var a b c
+         */
+      
+      function Foo() {
+          getName = function () {console.log(1);};
+          // window. getName = function () {console.log(1);};
+          return this;// 
+      }
+      Foo.getName = function() {console.log(2);};
+      Foo.prototype.getName = function () {console.log(3);};
+      var getName = function () {console.log(4);};
+      function getName() {console.log(5);};
+      Foo.getName();// 2
+      getName();// 4
+      Foo().getName();//1
+      getName();//1
+      var a = new Foo.getName();// 2 a = Foo.getName()
+      var b = new Foo().getName();// {}.getName() 3 b = undefined  new Foo() =>new Foo => {}.getName() =>3  没有返回值  所以 b = undefined
+      var c = new new Foo.getName();// 3  c = new Foo().getName() =>Foo.prototype.getName{}  new Foo => {}.getName() =>3 new {}.getName() =>3 new Foo.getName()
+      console.log(a,b,c);
+    </script>
+</body>
+</html>

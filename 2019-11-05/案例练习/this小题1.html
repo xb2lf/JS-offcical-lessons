@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        this  
+        1.window
+            全局打印this
+            函数 + 括号（函数执行）
+            定时器
+            (function(){})() 匿名函数自执行
+        2.事件触发的元素
+            只要是事件函数内的this都指向事件触发的元素
+        3.点前面的主
+            
+        4.实例
+            构造函数下的this是实例
+            构造函数原型的this是实例（前提实例调用）
+        5.箭头函数
+            指向的是声明
+         */
+        /* 事件触发的元素 */
+       
+       function Fn() {
+        this.name= 'zf';
+       }
+       Fn.prototype.name = '小明';
+       Fn.name = '小强';
+       Function.prototype.name = '小花';
+       console.log(Object.name);// 'Object'
+       console.dir(Object); // 自带属性和默认值 name: "Object"
+
+       /* 
+       
+        */
+    </script>
+</body>
+
+</html>

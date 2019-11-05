@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 实现输出结果分别为1 2 3 */
+        // function add() {
+        //     var num = 0;
+        //     num += 1;
+        //     console.log(num);
+        // }
+        // add();
+        // add();
+        // add();
+
+        // // 实现方法一:
+        // var num = 0;
+        // function add() {
+        //     num += 1;
+        //     console.log(num);
+        // }
+        // add();
+        // add();
+        // add();
+
+        // 实现方法二：
+        function add1(){
+            var num = 0;
+            return function() {
+                num += 1;
+                console.log(num);
+            }
+        }
+        let add = add1();
+        add();
+        add();
+        add();
+    </script>
+</body>
+
+</html>

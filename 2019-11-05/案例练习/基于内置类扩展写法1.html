@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    concat  
+
+    Array.prototype.myconcat
+     */
+     let ary = [1,2,3];
+     //  console.log(ary.concat([4,5,6]) === ary)  //false 输出的是一个新数组，会改变原数组
+    // 链式调用
+    // console.log(ary.concat([4,5,6]).concat([7,8,9]));// [1,2,3,4,5,6,7,8,9]
+
+    // console.log(ary.concat([4,5,6],[7,8,9])); // [1,2,3,4,5,6,7,8,9]
+    Array.prototype.myconcat = function(...arg) {
+        return [...this,...ary.flat(Infinity)];
+    }
+   console.log(ary.myconcat([4,5],[6,7]).myconcat([8,9]));// [1,2,3,4,5,6,7,8,9]
+    
+    </script>
+</body>
+</html>

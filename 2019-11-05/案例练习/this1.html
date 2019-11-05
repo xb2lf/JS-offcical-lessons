@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    this  
+    1.window
+        全局打印this
+        函数 + 括号（函数执行）
+        定时器
+        (function(){})() 匿名函数自执行它的this就是window
+    2.事件触发的元素
+        只要是事件函数内的this都指向事件触发的元素
+    3.点前面的主
+        
+    4.实例
+        构造函数下的this是实例
+        构造函数原型的this是实例（前提实例调用）
+    5.箭头函数
+        指向的是声明箭头函数上下文的this
+
+        没有arguments， 不能new
+     */
+     /* 函数执行 */
+    function Fn() {
+        console.log(this);// window
+    }
+    function Fnn() {
+        Fn();
+    }
+    new Fnn;
+    </script>
+</body>
+</html>
