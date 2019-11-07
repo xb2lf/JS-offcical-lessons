@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    class Person  {
+       constructor (name,age,sex) {
+           this.name = name;
+           this.age = age;
+           this.sex = sex;
+       }
+       init() {
+         this.say();
+         this.listen();
+       }
+       say () {
+        alert ('我叫大壮壮！！！');
+       }
+       see() {
+           console.log('我叫神龙擺尾！！！');
+       }
+       listen() {
+           console.log('我叫黑山老妖');
+       }       
+    };
+    // let only = new Person('白面包青天',18,'地球新生物');
+    // console.log(only); // {name: "白面包青天", age: 18, sex: "地球新生物"}
+
+    let only = new Person('白面包青天',18,'地球新生物').init();
+    </script>
+</body>
+</html>

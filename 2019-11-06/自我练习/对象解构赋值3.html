@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    let obj = {};
+    let arr = [];
+    // foo->123  -> obj.prop = 123 
+    ({ foo: obj.prop, bar: arr[0] } = { foo: 123, bar: true });
+
+    console.log(obj,arr);// obj = {prop: 123}     arr = [true]
+    obj.prop = {}.foo;
+
+    /* 
+    obj.prop = 123
+    arr[0]  = [true]
+     */
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        let {key1,key2} = {key1:val1,key2:val2}
+
+        在声明的时候使用块声明，块中放对象的key值，这里的key值一定要和解构对象的key值名字要一致
+
+        如果要改别名，使用：新定义的名字即可
+        let {key1:k,key2} = {key1:val1,key2:val2}
+
+        此时key1已经访问不到了，要访问就报错，只能访问k，k就代表key1，名字要跟声明变量规则一致
+
+        如果加了:不报错，那么可以先解构一次，再重命名
+
+        let {
+            f, // 先把f解构出来，就可以先访问了f了
+            f:x
+            f:{
+                name:'11',
+                age"22
+            }
+        }
+          
+         */
+
+    //      let obj = {
+    //          typ:'sug',
+    //          sa:'s_2',
+    //          q:'猪肉为什么涨价厉害',
+    //          s:'某炎生杀母猪'
+    //      }
+    // console.log(obj.typ);
+    // console.log(obj.q);
+    // console.log(obj.s);
+
+    let {type,q,s} = obj;
+    let {type:t,q,s} = obj;
+
+    let {log,dir} = console;
+    log(1);
+
+    </script>
+</body>
+
+</html>

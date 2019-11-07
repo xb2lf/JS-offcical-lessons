@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="ul" id="ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+       var lis  = document.getElementsByTagName('li');
+       var arr = [];
+       for (let i = 0; i < lis.length; i++) {
+           arr.push(lis[i]);   
+       }
+       // 返回一个新的数组，不传参就把整个数组返回
+    //    var arr = Array.prototype.slice.call(lis);
+       arr.forEach((ele,i) => {
+           ele.onclick = function() {
+               alert(i);
+           }
+       });
+
+
+       console.log(lis.forEach);
+    </script>
+</body>
+</html>

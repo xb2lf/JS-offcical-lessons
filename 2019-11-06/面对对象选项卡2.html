@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .active {
+            background: yellow;
+        }
+
+        #box div,
+        #box2 div {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+            display: none;
+        }
+
+        #box div.show,
+        #box2 div.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <div id="box2">
+        <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <script>
+        /* 
+        实例
+
+        点谁是谁
+        随着代码量的增大，面向过程会越写越恶心（难）
+        面向对象会越写越爽越简单
+         */
+        function Tab(id) {
+            this.box = document.getElementById(id);
+            this.divs = this.box.querySelectorAll('div');
+            this.btns = this.box.querySelectorAll('button');
+            this.prevIndex = 0;
+            this.timer;
+            this.num = 0;
+            //  this.events();
+        }
+        //绑定事件，循环每个btn，给每个btn添加一个click事件
+        Tab.prototype.events = function () {//evName='onclick'
+            const that = this;
+            for (let i = 0, len = this.btns.length; i < len; i++) {
+                this.btns[i].onclick = function () {
+                    that.change(i);
+                }
+            }
+        }
+        // 切换
+        Tab.prototype.change = function (i) {// that 指代的是点谁是谁的按钮
+            // 把刚才按钮的class清掉
+            this.btns[this.prevIndex].className = ''; //this指代的都是实例 当前 this.btns[this.prevIndex] =》 this.btns[0]
+            this.divs[this.prevIndex].className = ''; // //this指代的都是实例 当前 this.divs[this.prevIndex] =》 this.divss[0]
+            this.btns[i].className = 'active';// that指代的是点谁是谁的按钮
+            this.divs[i].className = 'show';
+            this.prevIndex = i;
+        }
+
+        Tab.prototype.play = function () {
+            this.timer = setInterval(() => {
+                this.num++;
+                this.num %= this.btns.length;
+                this.change(this.num);
+            }, 500);
+        }
+        let t = new Tab('box');
+        let t2 = new Tab('box2');
+        t2.events();
+        t.events();
+        t2.play();
+//    console.log(t);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+   function move({x, y} = { x: 0, y: 0 }) {
+        return [x, y];
+    }
+    /**
+        传了对象那么就按照传的对象来解析，不会按照默认的来解析 
+    **/
+    const {log} = console;
+    log(move({x: 3, y: 8}));  //3,8
+    log( move( {x: 3} )); //3,undefined
+    log( move({}));//undefined,undefined
+    log(move());//0,0
+
+
+    // log([1, undefined, 3].map((item='yes') => item) );// [1,'yes',3]
+    </script>
+</body>
+</html>

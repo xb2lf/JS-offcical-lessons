@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+          所有的数据都有一个toString的方法，但是写法是不一样的
+          唯独Object的toString是能够去检测当前的数据的类型，所以可以
+          把this改变，达到我们的目的
+
+          Array的toString，除了数组本身别的也都能检测数据类型
+
+          Array.from()  把类数组转为数组 ES6内置新方法
+        */
+    // console.log(Object.prototype.toString.call([]));// '[object Array]'
+    // let toS = Object.prototype.toString;
+
+    // let str = "123321";
+    // console.log(str.toString());
+    // console.log([1,2,3].toString());
+
+    console.log(Array.prototype.toString.call('3212'));// [object String]
+    console.log(Array.prototype.toString.call(['3212','456']));// '3212,456'  自己转自己不好使
+    console.log(Array.prototype.toString.call({}));// '[object Object]'
+    </script>
+</body>
+</html>
