@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let ary = [1,2,3,[1]];
+
+    function deepclone(obj) {
+        let ary = [];
+        for (let attr in obj) {
+            // 如果碰到了引用类型就继续循环，到原始类型才赋值
+           if (typeof obj[attr] === 'object' && obj[attr] !== null) {
+             ary[attr] =  deepclone(obj[attr]);
+           }
+           ary[attr] = obj[attr]; 
+        }
+        return ary;
+    }
+    let ary2 = JSON.parse(JSON.stringify(ary));
+    ary2[3].push(4);
+    console.log(ary2);
+    </script>
+</body>
+</html>

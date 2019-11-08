@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let ary = [1,2,3,[1],{name:123}];
+
+    function deepclone(obj) {
+        //看看obj是不是对象，不是对象就不执行deepclone
+        if(typeof obj !== 'object' && obj !== null){return null};
+        let o = Array.isArray(obj) ? [] : {}; // obj.push ? [] : {};
+        for (let attr in obj) {
+            // 如果碰到了引用类型就继续循环，到原始类型才赋值
+           if (typeof obj[attr] === 'object') {
+             o[attr] =  deepclone(obj[attr]);
+           }else{
+            o[attr] = o[attr]; 
+           }
+          
+        }
+        return ary;
+    }
+    let ary2 = deepclone(ary);
+    ary2[3].push(4);
+    console.log(ary);
+    </script>
+</body>
+</html>

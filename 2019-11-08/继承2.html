@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    面向对象的特征：
+        封装、继承、多态
+    继承：
+       子类具有父类一部分特征（这部分相同的特征是从父类继承下来的），自己还有自己的特征 
+
+
+       警察也有人类的属，但是人类已经写过一遍了，在警察里面其实是不用写的
+
+       继承的写法可以让子类的代码量减少很多，从而达到高内聚、低耦合的目的
+
+       继承方式有很多
+           类式继承（call继承）
+           原型继承
+           寄生式组合继承
+           拷贝继承
+           class继承
+           ...
+       继承最后的结果是  能够继承父类的属性和方法
+
+       继承属性:
+           调用父类，通过call把this变为子类的实例即可
+            
+             function Police (name,age) {
+             // this -> 实例
+             Person.call(this,name,age);
+             }
+       方法继承
+           通过浅拷贝，把父类上原型的方法或者属性都赋值给子类的原型
+            Object.assign(子类.prototype,父类.prototype);
+           
+     */
+     /* 方法继承  拷贝继承  Object.assign*/
+     function Person(name,age) {
+         this.name = name;
+         this.age = age;
+        //  console.log(this);// window
+     }
+     Person.prototype.say = function () {
+         alert('我的名字叫' + this.name);
+     }
+
+     function Police (name,age) {
+         // this -> 实例
+        Person.call(this,name,age);
+     }
+    
+     Police.prototype.say = function() {
+         alert('我是警察');
+     }
+    //   // 下面这种写法是不可取的，因为两个原型赋址了，修改A就会影响B
+    //  Police.prototype = Person.prototype;
+
+    Object.assign(Police.prototype,Person.prototype);
+     let p2 =new Police('赵炎',100);
+     let p3 =new Police('大壮壮',88);
+     p2.say();
+     p3.say();
+    </script>
+</body>
+</html>

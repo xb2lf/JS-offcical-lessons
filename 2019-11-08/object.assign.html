@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        
+        Object.assign  对象的浅拷贝
+         使用
+             Object.assign(obj2,obj1)
+
+             从右往左浅拷贝对象的属性，可以放若干的对象
+
+             Object.assign(obj2,obj1，obj0)
+
+             最后改变的是obj2,obj1是不会被修改的
+
+         */
+    let obj = {
+        name:'阿里',
+        age:10
+    }
+    let obj2 = {
+        age:5,
+        sex: '男',
+        name: 'zf'
+    }
+
+    let obj3 = {
+       aa:8
+    }
+    Object.assign(obj3,obj2,obj); // 越往右层级越高
+    console.log(obj,obj2,obj3);// obj = {name:'阿里',age:10}   obj2= {age: 5,name: "zf",sex: "男"} obj3 = {aa: 8,age: 10,name: "阿里",sex: "男"}
+
+    // let obj =  Object.assign(obj3,obj2,obj); // 越往右层级越高
+    // console.log(obj,obj2,obj4);
+    </script>
+</body>
+</html>

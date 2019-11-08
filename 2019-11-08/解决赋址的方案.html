@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        
+        如果不是赋址是赋值就解决了问题
+
+        两个引用类型的赋值就是赋值地址
+
+        原始类型的赋值就是普通赋值了，其实赋值引用类型的目的是拿到B拿到A下面的属性
+
+        如何才能避免赋址呢
+            1.需要两个不同地址
+            2.B地址下拥有A地址下的原始类型的数据即可（原始类型的赋值）
+
+         Object.assign  对象的浅拷贝
+         使用
+             Object.assign(obj2,obj1)
+
+             从右往左浅拷贝对象的属性，可以放若干的对象
+
+             Object.assign(obj2,obj1，obj0)
+         */
+    let prototype1 = {
+        say() {
+            console.log('我叫xxx');
+        }
+    }
+    let prototype2 = {}
+    // for (let attr in prototype1) {
+    //     // for in会枚举当前对象原型下的属性或者方法，使用hasOwnProperty就能只找对象自身的属性了
+    //     if (prototype1.hasOwnProperty(attr)) {
+    //         prototype2[attr] = prototype1[attr];
+    // }
+    //     }
+
+    Object.assign(prototype2,prototype1);
+    prototype2.say = function () {
+            console.log('我叫警察');
+    }
+    console.log(prototype2);
+    prototype1.say();
+    prototype2.say();
+    </script>
+</body>
+</html>

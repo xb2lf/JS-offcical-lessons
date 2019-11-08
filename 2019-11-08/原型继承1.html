@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     function Person(name,age) {
+         this.name = name;
+         this.age = age;
+         console.log('看我会出现几次'); // 出现了三次  第一次它本身打印  第二次Police属性继承  第三次Person实例(即 Police.prototype = new Person; )
+     }
+     Person.prototype.say = function () {
+         alert('我的名字叫' + this.name);
+     }
+
+     function Police (name,age) {
+         Person(this,name,age);
+     }
+    //  function Paohui () {}
+    //  Paohui.prototype = Person.prototype;
+    //  Police.prototype = new Paohui;
+
+    Police.prototype = new Person; // 这样写，虽然逻辑可以实现，但性能太低，每次都会调用构造函数全部，可我们只需要Person.prototype.say,所以应该用上边Paohui类过渡一下
+    Police.prototype.constructor = Police;
+     Police.prototype.say = function() {
+         alert('我是警察' + this.name);
+     }
+     Police.prototype.kongfu = function() {
+         console.log(this.name + '弄某炎');
+     }
+     let p2 = new Police('赵炎',100);
+     let p1 = new Person('刘成', 18);
+     p2.say();
+     p1.say();
+     /* 
+     p2.say -> p2.__proto__ -> Police.prototype -> new Paohui() -> new Paohui().__proto__ -> Paohui.prototype -> Person.prototype
+      */
+    </script>
+</body>
+</html>
