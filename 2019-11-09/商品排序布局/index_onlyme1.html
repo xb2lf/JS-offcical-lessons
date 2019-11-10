@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+    <section class="box">
+        <nav>
+            <span>排序</span>
+            <a href="javascript:void(0);">
+                <i class="up"></i>
+                <i class="down"></i>
+                上架时间
+            </a>
+            <a href="javascript:void(0);">
+                <i class="up"></i>
+                <i class="down"></i>
+                热度
+            </a>
+            <a href="javascript:void(0);">
+                <i class="up "></i>
+                <i class="down"></i>
+                价钱
+            </a>
+            <div>
+                <select name="" id="sele">
+                    <option value="title">按照文字搜索</option>
+                    <option value="hot">按照热度搜索</option>
+                    <option value="price">按照价格搜索</option>
+                </select>
+                <div id="num" class="hide">
+                        从<input type="text" id="start">
+                        到<input type="text" id="end">
+                   </div>
+                   <div id="txt" class="show">
+                        <input type="text" id="txt1">
+                   </div>
+                <button id="search">搜索</button>
+                <button id="init">还原</button>
+            </div>
+        </nav>
+        <ul class="list" id="ul">
+            <!-- <li>
+                <img src="./img/2.jpg" alt="">
+                <p>商品名称:<span>dsdsadsads</span></p>
+                <p>上架时间:<span>2019-10-10</span></p>
+                <p>商品热度:<span>32</span></p>
+                <p>商品价格::<span>200</span></p>
+            </li> -->
+        </ul>
+   </section>
+   <script>
+    fetch('./json/product.json').then(d => d.json()).then(data => {  
+        let newdata = data.concat(); // 复制一份新数组，以避免原数组不被污染或者
+        const as = document.querySelectorAll('nav a');// 获取导航nav下的a标签集合
+        const sele = document.querySelector('#sele');// 获取下拉框标签，以便确定搜索方式（描述文字、价格、热度）
+        const num = document.querySelector('#num'); // 获取包裹两个input框（有区间，输入数字的）的div
+        const txt = document.querySelector('#txt'); // 获取包裹一个input框（输入文字的）div
+        const txt1 = document.querySelector('#txt1'); // 获取输入文字的input框
+        const start = document.querySelector('#start');// 获取输入数字区间起始的input框
+        const end = document.querySelector('#end'); // 获取输入数字区间结束的input框
+        const search = document.querySelector('#search'); //获取点击搜素的按钮
+        const  init = document.querySelector('#init'); // 获取还原点击按钮
+        // console.log(as); // 测试a标签集合是否被获取到
+     //    console.log(newdata); // 测试json数组是否被获取到
+        const ul = document.querySelector('#ul');
+     //    console.log(ul);  // 测试ul是否被获取到
+       // 渲染数据，写入页面
+       function render(newdata) {
+         let lis = newdata.map(({img,title,time,hot,price},i)=>{
+              //    const {title,img,price,time,hot} = item;
+         return (
+             `<li>
+                 <img src="${img}" alt="">
+                 <p title="${title}">商品名称:
+                 <span>${title.substr(0,6)}</span></p>
+                 <p>上架时间:<span>${time}</span></p>
+                 <p>商品热度:<span>${hot}</span></p>
+                 <p>商品价格::<span>${price}</span></p>
+             </li>`
+         );
+        }).join('');
+        ul.innerHTML = lis;
+     //    console.log(ul); // 测试ul中的li列表是否被成功写入
+       }
+     render(newdata);
+     let ary = []; //初始化的位置
+        const li = document.querySelectorAll('li');
+
+        //布局转换
+        li.forEach((ele,i)=>{
+            ary.push({
+                l:ele.offsetLeft,
+                t:ele.offsetTop,
+                id:data[i].id
+            });
+            ele.style.top = ele.offsetTop + 'px';
+            ele.style.left = ele.offsetLeft + 'px';
+            // ele.style.position = 'absolute'
+        });
+        console.log(ary);
+
+      // 点击三个a标签（上架时间、热度、价格），分别进行不同的排序
+     as.forEach((ele,i) => {
+         ele.onoff = true; // 给nav下的每个a标签都添加一个自定义属性，以便获取到商品列表(li)属性名对应的属性值
+         ele.onclick =function() {
+            if (this.onoff) {
+                newdata.sort((a,b) => {
+                    switch (i) { // 三个a标签对应的索引
+                        case 0: // 如果是第一个a标签（上架时间）
+                        return new Date(a.time) - new Date(b.time);// 就把时间转成时间戳相减，然后以此作为排规则
+                        break;
+                        case 1: // 对应第二个a标签（热度）
+                        return a.hot -b.hot;
+                        break;
+                        default:// 对应第三个a标签（价格）
+                        return a.price - b.price;
+                        break;
+                    };
+                });
+                // 当点击a标签的时候，分别给a标签下两个上下三角添加或者除去颜色（）
+                this.children[0].classList.add('activet');
+                this.children[1].classList.remove('activeb');
+            }else{
+                newdata.sort((a,b) => {
+                    switch (i) {
+                        case 0:
+                        return new Date(b.time) - new Date(a.time); break;
+                        case 1:
+                        return b.hot -a.hot;
+                        break;
+                        default:
+                        return b.price - a.price;
+                        break;
+                    };
+                });
+                this.children[0].classList.remove('activet');
+                this.children[1].classList.add('activeb'); 
+            }
+            this.onoff = !this.onoff;// 给开关取反，以便循环使用
+            render(newdata);
+         };
+     });
+     
+    // 选择搜索方式，进行搜索
+     search.onclick = function () {
+         let {value:v3} = txt1; // let v1 =txt1.value 输入文字输入框的value
+         let {value:v1} = start; // let v1 = start.value 输入数字起始框的value
+         let {value:v2} = end; // let v2 = end.value  输入数字结束框的value 
+         let {value:v4} = sele ; // let v4 = sele.value 下拉选择框的value
+         let d = null; //用来接受和保存搜索结果
+         if(v3 || v1 && v2 ) {
+              /*
+                    当点击了确定之后，找到要搜索的内容，从内容中找范围
+                    目的:
+                        拿到条件符合的数据(一个个小对象)
+                        过滤:
+                            filter
+
+                    item{
+                        id，
+                        title，
+                        time，
+                        hot
+                    }
+                */
+            // if(v3) {// 选择按照描述文字进行搜索
+            //     d = data.filter(item => {
+            //       return item[v4].includes(v3);
+            //     });
+            // }else{// 按照热度或者价格进行搜索，输入的是数字区间
+            //     d = data.filter(item => {
+            //         return item[v4] >= v1 && item[v4] <= v2; 
+            //     });
+            // }
+        // 改成三元运算符方式
+         d = v3 ? (data.filter(item => item[v4].includes(v3))) : (data.filter(item => item[v4] >= v1 && item[v4] <= v2));
+         render(d);
+
+         // 还原数据及原始排序，重新渲染
+         init.onclick = function () {
+            render(data);
+         }
+         }else{
+             alert('请正确输入搜索内容');
+         }
+     };
+
+     // 当对下拉框进行操作，搜素方式改变的时候，让对应的输入框显示和隐藏
+     sele.onchange = function () {
+         txt1.value = start.value = end.value = '';// 清空三个输入框的内容，以便切换搜索方式后，原先输入内容不再被保存，才不会影响切换搜索方式后的逻辑判断结果
+         let {value} = this;
+        //  if(value === 'title'){
+        //         num.className = 'hide';
+        //         txt.className = 'show';
+        //     }else{
+        //         num.className = 'show';
+        //         txt.className = 'hide';
+        //     }
+
+        // 将上边的if判断改成三元运算符形式
+            value === 'title' ? (num.className = 'hide', txt.className = 'show') :  (num.className = 'show',txt.className = 'hide');
+     }
+    });
+    </script>
+</body>
+</html>
