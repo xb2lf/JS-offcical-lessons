@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 通过对象方式去检测
+        class Tools {
+            static type(data) {
+                let obj = {
+                    objcet: 'Objcet',
+                    array: 'Array',
+                    null: 'Null'
+                };
+                let toS = Object.prototype.toString;
+                if (typeof data !== 'object') {
+                    return typeof data;
+                }
+                for (let attr in obj) {
+                    if (toS.call(data) === `[object ${obj[attr]}]`) {
+                        return attr;
+                    }
+                }
+            }
+        }
+        let dete = Tools.type(null);
+        console.log(dete);
+
+
+        // class Tools {
+        //     static type(data) {
+        //        let ary = ['Null','Array','Object'];
+        //     //    let ary2 = ['null','array','objcet'];
+        //         let toS = Object.prototype.toString;
+        //         if (typeof data !== 'object') {
+        //             return typeof data;
+        //         }
+        //        for (let i = 0; i < ary.length; i++) {
+        //           if (toS.call(data) === `[objcet ${ary[i]}`) {
+        //               return ary[i].toLowerCase();
+        //           }
+                   
+        //        }
+        //     }
+        // }
+        // let dete = Tools.type(null);
+        // console.log(dete);
+    </script>
+</body>
+
+</html>

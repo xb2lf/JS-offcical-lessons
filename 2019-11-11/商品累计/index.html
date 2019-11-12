@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body onselectstart="return false;">
+	<div class="wrap">
+		<div class="box">
+			<ul class="list">
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+			</ul>
+			<div class="info">
+				<span>商品共合计：<em>0</em>件</span>
+				<span>共花费了：<em>0</em>元</span>
+				<br />
+				<br />
+				<span>其中最贵的商品单价是：<em>0</em>元</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		class Cart {
+			constructor() {
+				this.ii = document.querySelectorAll('.list i');
+				this.em = document.querySelectorAll('.list em');
+				this.span = document.querySelectorAll('.list span');
+				this.info = document.querySelectorAll('.info em');
+				this.ary = [];
+				this.total = 0;
+				this.price = 0;
+
+			}
+			init() {
+				this.operation();
+			}
+			//增加、减少或者清零 商品
+			operation() {
+				this.em.forEach((item, i) => {
+					let that = this;
+					item.nextElementSibling.onclick = function () {
+						let up = item.innerHTML;
+						up++;
+						item.innerHTML = up;
+						that.span[i].children[1].innerHTML = parseFloat(that.span[i].children[0].innerHTML) * up + '元';
+						that.info[0].innerHTML = ++that.total;
+						that.info[1].innerHTML = that.price += parseFloat(that.span[i].children[0].innerHTML);
+						that.ary.push(parseFloat(that.span[i].children[0].innerHTML));
+						that.info[2].innerHTML = that.ary.length > 0 ?  Math.max(...that.ary)  : 0 ;
+					}
+					item.previousElementSibling.onclick = function () {
+						let down = item.innerHTML;
+						if (down > 0) {
+							down--;
+							item.innerHTML = down;
+							that.span[i].children[1].innerHTML = parseFloat(that.span[i].children[0].innerHTML) * down + '元';
+							that.info[2].innerHTML = 0;
+							that.info[0].innerHTML = --that.total;
+							that.info[1].innerHTML = that.price -= parseFloat(that.span[i].children[0].innerHTML) ;
+							that.ary.pop(parseFloat(that.span[i].children[0].innerHTML));
+							that.info[2].innerHTML = that.ary.length > 0 ?  Math.max(...that.ary)  : 0 ;
+
+						}
+					}
+				})
+
+			}
+		};
+		let shopping = new Cart();
+		shopping.init();
+	</script>
+</body>
+
+</html>
