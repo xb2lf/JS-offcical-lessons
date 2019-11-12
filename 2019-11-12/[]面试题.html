@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        计算出下列字符字节，假设英文是1个字节，中文是2个字节
+
+        中文的区间范围：[\u4e00-\u9fa5]
+        /[\u4e00-\u9fa5]/.test('龍'); //true
+
+         */
+        let str = '大渣好,是兄弟就来砍我,come.on!'; // 30
+        let num = 0; // 计数
+        for (let i = 0; i < str.length; i++) {
+            if (/[\u4e00-\u9fa5]/.test(str[i])) {
+                num += 2;
+            } else {
+                num++;
+            }
+        }
+        console.log(num);
+
+
+        // for (let i = 0; i < str.length; i++) {
+        //     if (/[a-z.,!]/i.test(str[i])) {
+        //         num++;
+        //     } else {
+        //         num += 2;
+        //     }
+        // }
+        // console.log(num);
+    </script>
+</body>
+
+</html>

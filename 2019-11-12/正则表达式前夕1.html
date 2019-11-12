@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+          请你把下列字符串中的数字挑出来，存到一个数组中
+    
+          请你把下列字符串中数组包括连续的数子挑出来，存到一个数组中
+          Number('') -> 0
+          parsrInt('') - > NaN -> typeof NaN ->  'number'
+          isNaN(parseInt(str[i])) -> true -> !isNaN(parseInt(str[i]))
+         */
+        let str = 'xh271yrc74326rgb087yr23n6x8';
+        let ary = [];
+        let temp = '';
+        for (let i = 0; i < str.length; i++) {
+            // 如果当前的字符串为数字那么进行字符串拼接
+            if (!isNaN(parseInt(str[i]))) {
+                // 最后一次循环的时候如果字符为数字，那么只是做了拼接，所以最后一次数字是没有放到数组中的
+                temp += str[i];
+            } else {// 如果当前的字符串不是数字，那么就把之前拼接好的字符放到数组中，并且清空这个字符串是为了保证下次使用
+                if (temp) { // 保证temp不是一个空字符串
+                    ary.push(temp);
+                    temp = '';
+                }
+            }
+
+        }
+        // for循环之后，如果发现temp不是一个空字符串，说明最后几个为数字，需要把没有push到数组中的数字字符放到数组中
+        if (temp) { // 保证temp不是一个空字符串
+                    ary.push(temp);
+                    temp = '';
+                }
+     console.log(ary);// ["271", "74326", "087", "23", "6", "8"]
+    </script>
+</body>
+
+</html>

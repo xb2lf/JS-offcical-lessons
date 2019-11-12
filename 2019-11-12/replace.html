@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+     string.repalce('','')  替换  字符串方法
+     string.repalce(''或者放正则,'替换字符'或者放函数)
+
+     过滤敏感词
+     */
+     let  str = '珠枫';
+     console.log(str.replace('枫','峰')); // '珠峰'
+
+     let srr = '1珠266枫3';
+     console.log(str.replace(/\d+/g,'')); // '珠枫'
+
+     let stt = '冉德鹏和李磊见不得光的新鲜事';
+    //  console.log(stt.replace(/冉德鹏|李磊|不得光/g,'*')); // '*和*见*的新鲜事'
+
+    /* 
+      函数的第一个参数就是每次匹配的字符，如果匹配多次那么就会多次调用
+     */
+    console.log(stt.replace(/冉德鹏|李磊|不得光/g,function($0){
+        console.log ($0);
+        let temp = '';
+        for (let i = 0; i < $0.length; i++) {
+             temp += '*';
+            
+        }
+        return temp;
+    })); // ***和**见***的新鲜事
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    match  字符串方法  string.match(//)  
+        找到正则匹配的字符，并且把它们放到数组中（返回值是数组）（可以一次也可以多次）,找不到返回null
+
+        跟exec类似，exec是正则身上的方法，而match是字符串的方法
+
+    正则特性
+    1.懒惰
+         你让它找一个，绝对不会找第二个；你让它找一堆，它绝对不会找第二堆
+    2.贪婪
+         只要符合某个规则就不停的找，直到找不到为止
+    
+     i : 忽略大小写  ignoreCase
+     */
+
+     let str = 'dnn92';
+     console.log(str.match(/\d/)); // ["9", index: 3, input: "dnn92", groups: undefined]  找一个数字  只找一次
+     console.log(/\d/.exec(str)); // ["9", index: 3, input: "dnn92", groups: undefined]
+
+     let srr = '32632321323rgb087yr23n6x832321';
+     console.log(srr.match(/\d+/g));// ["32632321323", "087", "23", "6", "832321"]
+
+     let stt = '378937Z2189';
+     console.log(stt.match(/Z/)); // ["Z", index: 6, input: "378937Z2189", groups: undefined]
+     console.log(stt.match(/z/i));// ["Z", index: 6, input: "378937Z2189", groups: undefined]
+     let lett = '37z89z37Z218Z9';
+     console.log(lett.match(/z/ig));// ["z", "z", "Z", "Z"]
+    </script>
+</body>
+</html>

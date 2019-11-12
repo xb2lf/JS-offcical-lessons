@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    正则表达式
+         专门用来（更擅长处理模糊范围的字符串）检索字符串的一种规则
+         /规则或者不带引号的查询字符/ 'a' /a/
+         new RegExp(字符串或者变量,修饰符)
+       难点：
+         1. 规则 -> 规律，现象（积极总结）
+         2. 如果今天的课没有听，明天就会是天书
+         3. 在写的时候清晰明白自己在干啥，当你写完之后写的到底是啥？
+      容易点：
+         没有逻辑  只有拼命背  拼命用
+
+         {}  [] ''
+         new Objcet ,new Array
+
+         // -> 字面量的写法
+         new RegExp(规则【可以为字符串的，可以进行字符串拼接】，修饰符) -> new实例的写法
+
+     \: 转义符  把正则有特殊含义的字符  转成字符本身((不再有任何特殊的含义)),转义符转的是\后面的字符
+
+     */
+     let str  = 'abc';
+     let aa = 'a';
+     // *** 什么时候用//    什么时候用new  RegExp
+    //  console.log(/aa/); // 找的是字符aa(正则里面放的是不带引号的字符串或者规则)
+     console.log(new RegExp(aa));// 找的的是变量aa，其实就是字符串aa
+
+     alert('通知:\n 明天考试');// 一次转义，进行换行
+     alert('通知:\\n 明天考试');// 两次转义，将\n转成正常字符，进行保留
+
+     let s = 'abcd\\';
+     console.log(s); // abcd\
+
+     console.log(/a/); // /a/
+     console.log(new RegExp('a'));// /a/
+     console.log(new RegExp('/a/')); // /\/a\//
+
+     let srr = 'a\da';
+     console.log(new RegExp('\\d'));// /\d/
+
+     console.dir(/a/);  // exec  test  正则的两种方法
+    </script>
+</body>
+</html>

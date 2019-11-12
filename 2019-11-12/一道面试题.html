@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+      2019年11月12日
+      2019/11/12
+      2019-11-12
+      2019-_-!~11_-__-_^_^!12
+
+      1. 把数字拿出来拼接一波     
+      2. 把所有非数字拿出来
+
+      \d 一个数字
+      \D 一个非数字
+
+      replace的细节
+           默认情况下，函数的
+           第一个参数是每次匹配字符
+           第二个参数是匹配字符索引
+           第三个参数是整个字符串
+           第四个参数undefined
+        如果有分组：
+           ()  一个括号是一个分组  从左往右数
+           提权： (1+1) * 5
+           第一个参数是每次匹配字符
+           第二个参数是第一个分组
+           之后有几个分组，参数就是分组项
+           直到分组读完就正常走索引、整个字符串、undefined
+
+          (((\d+))(((\D)+))((\d+)))    8个分组
+
+        如果分组的后面有量词，那么分组项为最后一个字符  (\d+)  这个分组是最后一个数组
+    */
+    let str = ' 2019/11/12';
+    // let ary = str.match(/\d+/g);
+    // console.log(ary[0]+'年'+ ary[1] + '月' + ary[2] + '日' ); // '2019年11月11日'
+
+    // str.replace(/(\d+)\D+(\d+)\D+(\d+)/,function($0,$1,$2,$3) {
+    //    console.log($0,$1,$2,$3); // 2019/11/12 1  2019/11/12 undefined
+    // });
+
+    let s = str.replace(/((\d)+)\D+(\d+)\D+(\d+)/,function($0,$1,$2,$3,$4) {
+    //    console.log($0,$1,$2,$3,$4); // 2019/11/12 2019 9 11 12
+       return $1 + '年' + $3 + '月' + $4 + '日';
+    });
+    console.log(s);// 2019年11月12日
+    </script>
+</body>
+</html>

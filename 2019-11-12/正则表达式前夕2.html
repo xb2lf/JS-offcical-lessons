@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+          请你把下列字符串中的数字挑出来，存到一个数组中
+    
+          请你把下列字符串中数组包括连续的数子挑出来，存到一个数组中
+          Number('') -> 0
+          parsrInt('') - > NaN -> typeof NaN ->  'number'
+          isNaN(parseInt(str[i])) -> true -> !isNaN(parseInt(str[i]))
+         */
+        let str = 'xh271yrc74326rgb087yr23n6x8';
+  
+       console.log(str.match(/\d+/g));// ["271", "74326", "087", "23", "6", "8"]
+       console.log(str.match(/\D+/g));// ["xh", "yrc", "rgb", "yr", "n", "x"]
+    </script>
+</body>
+
+</html>
