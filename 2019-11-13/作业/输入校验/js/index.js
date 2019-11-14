@@ -117,6 +117,7 @@ class Verify {
             }
         }
         this.btn.onclick =function () {
+        that.qq.value = that.email.value = that.phone.value = that.birth.value = '';
         window.location.href="http://www.zhufengpeixun.cn/";
 
         }
