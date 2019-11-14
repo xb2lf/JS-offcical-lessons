@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+      定义一个字符串，然后检测字符串两边的空格并去掉空格（不管多少空格）
+     */
+    let str = '    d n s   ';
+
+    // 原始方法手写
+
+    // for (let i = 0; i < str.length; i++) {
+    //     if(str[i] !== ' ') {
+    //         str = str.substring(i);
+    //         break;
+    //     }
+        
+    // }
+    // console.log(str); //'d n s'
+
+   // trim() 方法  去掉字符串的前后空格
+    // str = str.trim();
+    // console.log(str);// 'd n s'
+
+    // 正则  \s  一个空格
+
+    str = str.replace(/^\s+|\s+$/g,'');
+    console.log(str); //'d n s'
+
+    </script>
+</body>
+</html>

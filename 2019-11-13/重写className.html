@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <ul>
+                <li class="li clear li1">1</li>
+                <li>2</li>
+                <li class="li">3</li>
+            </ul>
+    <script>
+    //  在没有getByClassName和querySele...等之前通过class获取元素列表的弊端
+
+    // let li = document.getElementsByTagName('li');
+    // // console.log(li);// [li.li.clear.li1, li, li.li]
+    // for (let i = 0; i < li.length; i++) {
+    //     console.log(li[i].className);
+    //     // 现在我只想把class名为li的li元素添加背景颜色，由于我在第一个和第三个li上加上了class名li，正常情况下第一个和第三个都会被添加背景颜色
+    //     if(li[i].className === 'li') {
+    //         li[i].style.background = 'red';
+    //     }
+    // }
+     // 而现在只有第三个li元素被添加背景颜色，这就是弊端
+
+     /* 
+     
+     通过正则中英文的边界符（\b）的规律手写className，让我们通过className能够正确获取想要操作的元素
+      1.找到页面所有的标签
+        2.从这些标签中获取带class为li的元素
+        3.找到它们，并且放到数组中
+      */
+
+    //通过原生方法去写
+
+    // function getByClass (cname) {
+    //     let elements = document.getElementsByTagName('*'); // 获取所有的标签
+    //     let ary = [];
+    //     for (let i = 0; i < elements.length; i++) {
+    //         // 获取所有的class名
+    //         let scn = elements[i].className;
+    //         // 然后把获取到的class名都用空格分隔,并保存下来
+    //         let ary2 = scn.split(' ');
+    //         // console.log(ary2); //  ['li','clear'],['li'],['a'],
+    //         // 循环新数组
+    //         ary2.forEach(className => {
+    //             if(className === cname) {// 当class名和需要获取的class就写到数组当中保存起来
+    //              ary.push(elements[i]);
+
+    //             };
+    //         });
+
+
+            
+    //     }
+    //     return ary;
+    // }
+
+
+    // 正则写法
+    function getByClas(cname) {
+        let elements = document.getElementsByTagName('*');//找到所有的标签
+        let ary = [];
+        let re = new RegExp('\\b' +cname + '\\b' );
+        for(let i=0;i<elements.length;i++){
+            if(re.test(elements[i].className)){
+                ary.push(elements[i]);
+            }
+        }
+        return ary;
+    }
+
+    // 调用验证是否封装成功
+    let lis = getByClass('li');// 获取所有className为li的标签元素集合
+    // console.log(lis); // 验证是否已经都获取到
+    for(let i=0;i<lis.length;i++){// 循环这个集合，把className为li的标签的背景色为红色
+        lis[i].style.background = 'red'; 
+    }
+   //  所有className为li的标签都已加上背景色
+    
+    </script>
+</body>
+</html>

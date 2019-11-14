@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        i  忽略大小写
+        g   全局匹配
+        m 多行匹配
+    */
+    let str = `
+        某This is 某
+        某This is 某
+        某This is 某`;
+console.log(str.match(/某$/m));// ["某", index: 18, input: "↵        某This is 某↵        某This is 某↵        某This is 某", groups: undefined]
+console.log(str.match(/某$/mg)); // ["某", "某", "某"]
+console.log(str.match(/某/g)); //["某", "某", "某", "某", "某", "某"]
+console.log(str.match(/某+/g)); // ["某", "某", "某", "某", "某", "某"]
+
+    </script>
+</body>
+</html>

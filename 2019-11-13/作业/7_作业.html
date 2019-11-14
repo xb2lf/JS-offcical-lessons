@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+       把下面str的name，age，say换成obj中的value值
+    */  
+    let obj = {
+        name:'小明',
+        age:18,
+        say:'好好学习，天天向上'
+    }  
+    let str = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+ 
+    let newstr = str.replace(/name|age|say/g,($0) => {
+        switch ($0) {
+            case 'name':
+                return $0 = obj.name;
+                break;
+            case 'age':
+                return $0 = obj.age;
+                break;
+            default:
+                return $0 = obj.say;
+                break;
+        }
+    });
+    console.log(newstr);// '我的名字叫{小明},年龄是{18}岁,我想说:{好好学习，天天向上}'
+    /*
+        计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+    */
+    
+    let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+
+    let ary = str2.split('').sort().join('').match(/(\d|[a-z])\1+/g).sort((a,b) => {
+        return a.length -b.length;
+    });
+    let asw = '出现最多的字符是：' + ary[ary.length-1] + '；出现次数是：' + ary[ary.length-1]['length'] + '。';
+    console.log(ary);
+    console.log(ary[ary.length-1]);
+    console.log( ary[ary.length-1]['length']);
+    console.log(asw);
+    
+    // let ary = str2.split('').sort().join('').match(/(\d|[a-z])\1+/g).sort((a,b) => {
+    //     return b.length -a.length;
+    // });
+    // let asw = '出现最多的字符是：' + ary[0] + '；出现次数是：' + ary[0]['length'] + '。';
+    // console.log(ary);
+    // console.log(ary[0]);
+    // console.log( ary[0]['length']);
+    // console.log(asw);
+
+    
+
+
+
+</script>
+</body>
+</html>

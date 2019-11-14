@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+      ?=  前瞻仰
+        ?<= 后瞻仰
+        ?!  负前瞻仰
+        ?<! 负后瞻仰
+     */
+     let str = '中国人中国人德国人美国人越南人缅甸人中国人老挝人菲律宾人';
+     //匹配项是括号的后面（后瞻仰）
+     console.log(str.replace(/(?<=中国)人/g,'神'));// 全局匹配'中国人'的'中国'后边的'人'，然后将'人'替换为'神'
+     //匹配项是括号的前面（前瞻仰）
+     console.log(str.replace(/中国(?=人)/g,'华夏龍'));// 全局匹配'中国人'的'人'前边的'中国'，然后将'中国'替换为'华夏龍'
+
+     let str2 = 'activea,activeb,lia,lib,diva,divb';
+    // 取 activea和activeb后边的所有
+     console.log(str2.match(/[ld]i[a-z]{1,2}/g)); // ["lia", "lib", "diva", "divb"]
+
+     // 负后瞻仰
+    //   console.log(str2.match(/(?<!active)(a|b)/g));
+     // 值取 activea和activeb  
+      console.log(str2.match(/active(a|b)/g));// ["activea", "activeb"]
+    // 只找排除active的a（负前瞻仰）
+    console.log(str2.match(/(?<!active)(a|b)/g));// ["a", "a", "a", "b", "a", "b"]
+    </script>
+</body>
+</html>

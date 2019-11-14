@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    \w  一个数字、字母、下划线
+    \W  一个非数字、字母、下划线
+
+    需求一：6~18个字符{}，可使用字母、数字、下划线，需以字母开头（网易邮箱起名规则）
+     /^[a-zA-Z]\w{5,17}$/.test(邮箱名)
+
+     需求二：验证以下所有邮箱名
+      n63_h1@163.com
+        xxx_love@163.com
+        xxx_32@126.com
+        xx-x_32@139.com
+        xxx_32@gmail.com
+        xxx_32@hotmail.com
+        xxx._32@hotmail.com
+        xxx^._32@sina.com
+        xxx._32@sina.cn
+
+    (/^[a-zA-Z][\w.-]{5,17}@[0-9a-zA-Z]{2,10}\.c(om|n)$/.test(邮箱名)
+     */
+    </script>
+</body>
+</html>

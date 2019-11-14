@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // /^1[3-9]\d{9}$/.test(phonenumber)
+    // /^[1-9]\d{4,10}$/.test(qqnumber)
+    // /^[a-zA-Z]\w{5,17}$/.test(邮箱名)
+    // /^[a-zA-Z][\w.-]{5,17}@[0-9a-zA-Z]{2,10}\.c(om|n)$/.test(邮箱名)
+    // /^[a-zA-Z][\w\W]{5,17}@[0-9a-zA-Z]{2,10}\.c(om|n)$/.test(邮箱名)
+
+    //  replace回调函数的参数
+    let str = '中国人中国人德国人美国人越南人缅甸人中国人老挝人菲律宾人';
+    console.log(str.replace(/中国人/g,($0) => {
+        return $0.substr(0,2) + '神'
+    })); // 全局匹配'中国人',并截取前两位和字符串'神'进行拼接，以达到将'人'替换成'神'  '中国神中国神德国人美国人越南人缅甸人中国神老挝人菲律宾人'
+
+    //将上边继续简化
+    console.log(str.replace(/中国人/g,$0 => $0.substr(0,2) + '神'));// '中国神中国神德国人美国人越南人缅甸人中国神老挝人菲律宾人'
+    </script>
+</body>
+</html>
