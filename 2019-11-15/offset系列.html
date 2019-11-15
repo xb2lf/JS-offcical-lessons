@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+    margin: 20px auto;
+    width:100px;
+    height:100px;
+    background: skyblue;
+    padding:50px;
+    border:1px solid #000;
+}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    /* 
+     下面的属性结果都为不带单位的数字：
+      offsetWidth/offsetHeight   盒子可视的宽度(支持padding + border)
+      offsetParent  定位父级(元素)
+      offsetLeft/offsetTop  定位父级到当前元素的距离（当前元素的左外边框到定位父级的左内边框的距离）
+     */
+
+     const box = document.getElementById('box');
+     console.log(box.offsetWidth,box.offsetHeight);// 202 202  这是加上padding和border的宽度的宽和高
+    </script>
+</body>
+</html>

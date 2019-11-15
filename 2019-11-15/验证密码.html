@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    验证输入密码是否符合规则
+
+    必须6-8位，字母+数字，可以有点，严格区分大小写
+     */
+
+    let str = 'Qasd34SC';
+    console.log( /^[A-Z][a-zA-Z0-9.]{5,7}$/.test(str));// true
+    </script>
+</body>
+</html>

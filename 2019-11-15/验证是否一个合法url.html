@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+     拿到一个合法的URL然后拆分进行分析正则匹配规则
+     
+     http:/https: => ^(http)?s:
+     // => \/\/
+     www. => w{3}\.
+     baidu => [a-z]{2,18}  
+     .com|.cn|.com.cn|.net ... => (\.[a-z]{2,3}){1,2}
+     /s? => /[a-z]{1,10}\?
+     ie=utf-8&f=8&rsv_bp=1 => (([a-z]\w{0,10})=([\w=%-]+)&?)+
+     #1234 =>( #\d{1,})?$
+
+     将这些规则分好组组合起来，如下：
+      /^(http)s?:\/\/w{3}\.[a-z]{2,18}(\.[a-z]{2,3}){1,2}\/[a-z]{1,10}\?(([a-z]\w{0,10})=([\w=%-]+)&?)+( #\d{1,})?$/
+     */
+
+    let str = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=%E7%9A%AE%E5%8D%A1%E4%B8%98&rsv_pq=9944c5f8004814ea&rsv_t=8b94MmK61GDnQ8tzuN%2FSzSf1EnqhRfm8sD4CrxNXnrlgVe6lIHLTpG5j378&rqlang=cn&rsv_enter=1&rsv_dl=tb&rsv_sug3=8&rsv_sug1=10&rsv_sug7=101&rsv_sug2=0&inputT=5558&rsv_sug4=11832#1234';
+
+    // 测试一波
+    console.log(/^(http)s?:\/\/w{3}\.[a-z]{2,18}(\.[a-z]{2,3}){1,2}\/[a-z]{1,10}\?((([a-z]\w{0,10})=([\w=%-]+)&?)+)(\#\d{1,})?$/.test(str)); // true
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    /* 
+    style为行内样式，样式表中的样式是通过元素的style的属性名获取不出来的
+
+     想要获取样式表中的样式可以使用：
+    getComputedStyle(element).attr（atrr样式属性名）
+    
+     getComputedStyle:获取到的是计算后的样式
+    *注意:
+                这个方法获取的值是带单位的
+    有时候需要隐藏某个元素，但是又要存一个当前元素的尺寸，这个时候使用getComputedStyle
+     */
+     console.log(getComputedStyle(box).width);// 获取到的是样式表中定义的【 width: 100px;】
+    </script>
+</body>
+</html>

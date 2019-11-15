@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            padding: 50px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        /* 
+       下面的属性结果都为不带单位的数字：
+            clientWidth/clientHeight   盒子可视的宽度(支持padding)
+
+            clientLeft/clientTop   左边框和上边框
+         */
+        const box = document.getElementById('box');
+        let { width, height } = getComputedStyle(box);
+
+        console.log(width, height);// 100px 100px,不算padding和border的宽和高
+
+        console.log(box.clientWidth,box.clientHeight);// 200 200  算上padding不加border宽度的宽和高，而且不带单位
+
+        console.log(box.clientLeft,box.clientTop);// 1 1  左边框和上边款的宽度
+    </script>
+</body>
+
+</html>

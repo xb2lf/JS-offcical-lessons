@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+     拿到一个合法url然后去获取超链接域名后边的参数
+     https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js
+
+     如上边url，取出 https://www.baidu.com/ 后边的参数
+
+     经过分析  后边参数对应 key=value&key=value  对应规则为/([a-z]\w{0,10})=([\w=%-]+)&?/g
+      将这些参数获取后按照key和value对应的方式写到一个新对象里
+     */
+
+    let str = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js';
+    // 将做好的规则保存下
+    let re = /([a-z]\w{0,10})=([\w=%-]+)&?/g;
+    // 准备好一个新的空对象
+    let obj = {};
+
+    // str.replace(re,(...arg)=>{
+    //         let a = arg[1];
+    //         let b = arg[2];
+    //         obj[a] = b;
+    //     });
+    //     console.log(obj);// {ie: "utf-8", f: "8", rsv_bp: "1", rsv_idx: "1", tn: "baidu", …}
+
+   // 优化重写
+   str.replace(re,(...arg)=>{
+            // console.log(arg);// arg格式为["ie=utf-8&", "ie", "utf-8", 24, "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js"]，第一项为每次匹配的字符，第二项第一个分组项，第三项第二个分组项
+            obj[arg[1]] = arg[2];
+        });
+        console.log(obj);// {ie: "utf-8", f: "8", rsv_bp: "1", rsv_idx: "1", tn: "baidu", …}
+
+    </script>
+</body>
+</html>

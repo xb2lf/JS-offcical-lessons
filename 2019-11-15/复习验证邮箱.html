@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+      邮箱名验证
+
+      n63_h1@163.com
+        xxx_love@163.com
+        xxx_32@126.com
+        xx-x_32@139.com
+        xxx_32@gmail.com
+        xxx_32@hotmail.com
+        xxx._32@hotmail.com
+        xxx^._32@sina.com
+        xxx._32@sina.cn
+     */
+
+     let str = 'xxx._32@sina.com';
+     
+    // 开头为一个字母、数字或者下划线
+    console.log(/^[\w\W]{5,10}@[\da-zA-Z]{2,8}\.c(om|n)$/.test(str)); // true
+
+    //开头字母为英文\w{4}
+    // console.log(/^[a-zA-Z][\w.]{4,9}@[\da-zA-Z]{2,8}\.c(om|n)$/.test(str))
+    </script>
+</body>
+</html>

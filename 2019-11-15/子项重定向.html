@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    () -> 重复子项
+
+        \数字(子项的个数) -> \1 \2  代表第N个子项
+
+        重复子项只能用在匹配子项之后
+
+     */
+     let str = 'acbc';
+   // 下面的代码，本来是打算匹配acbc，因为c为第三个分组a后面跟了一个\3（c），\3在 c分组的前面所以匹配不成功
+    // str.replace(/(a)\3(b)(c)/,function($0,$1){
+    //     console.log($0); // 匹配不成功，无输出
+    // })
+
+    str.replace(/(a)(c)(b)\2/,function($0,$1){
+        console.log($0); // acbc 匹配成功
+    });
+    </script>
+</body>
+</html>
