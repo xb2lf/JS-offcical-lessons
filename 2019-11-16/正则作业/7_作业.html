@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /* 
+    Object.keys(obj);可以把对象的key拿出来是个数组
+    Object.values(obj);可以把对象的value都拿出来，是个数组
+    
+     */
+
+
+        /*
+           把下面str的name，age，say换成obj中的value值
+        */
+        let obj = {
+            name: '小明',
+            age: 18,
+            say: '好好学习，天天向上'
+        }
+        let str = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+
+        let newstr = str.replace(/name|age|say/g, ($0) => {
+            switch ($0) {
+                case 'name':
+                    return $0 = obj.name;
+                    break;
+                case 'age':
+                    return $0 = obj.age;
+                    break;
+                default:
+                    return $0 = obj.say;
+                    break;
+            }
+        });
+        console.log(newstr);// '我的名字叫{小明},年龄是{18}岁,我想说:{好好学习，天天向上}'
+
+        // 老师讲
+        let s = str.replace(/{(\w+)}/g, (...arg) => {
+            // console.log(arg);
+            let [, key] = arg;
+            return obj[key];
+
+        });
+        console.log(s);
+        /*
+            计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+        */
+
+        let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+        /* 自己写的 */
+        let ary = str2.split('').sort().join('').match(/(\d|[a-z])\1+/g).sort((a, b) => {
+            return a.length - b.length;
+        });
+        let asw = '出现最多的字符是：' + ary[ary.length - 1] + '；出现次数是：' + ary[ary.length - 1]['length'] + '。';
+        console.log(ary);
+        console.log(ary[ary.length - 1]);
+        console.log(ary[ary.length - 1]['length']);
+        console.log(asw);
+
+        // let ary = str2.split('').sort().join('').match(/(\d|[a-z])\1+/g).sort((a,b) => {
+        //     return b.length -a.length;
+        // });
+        // let asw = '出现最多的字符是：' + ary[0] + '；出现次数是：' + ary[0]['length'] + '。';
+        // console.log(ary);
+        // console.log(ary[0]);
+        // console.log( ary[0]['length']);
+        // console.log(asw);
+
+        /* 老师讲 */
+
+        // 原生写
+        // 方法一
+        let obj1 = {};
+        for (let i = 0; i < str2.length; i++) {
+            if (!obj1[str2[i]]) {
+                obj1[str2[i]] = 1;
+            } else {
+                obj1[str2[i]] += 1;
+            }
+
+        }
+        let max = -Infinity;
+        let key = '';
+        for (let attr in obj1) {
+            if (obj1[attr] > max) {
+                max = obj1[attr];
+                key = attr;
+            }
+        }
+        console.log(obj1);// {2: 5, 3: 1, 8: 4, 9: 1, h: 5, d: 7, n: 7, x: 5, a: 17, …}
+        console.log(`${key}是出现最多的字符，出现次数是${max}。`); //a是出现最多的字符，出现次数是17。
+
+        // 方法二
+
+        let obj3 = {};
+        let ary4 = [];
+        for (let i = 0; i < str2.length; i++) {
+           if(!ary4.includes(str2[i])){
+            let re = new RegExp(str2[i], "g");
+            let len = str2.match(re).length;
+            obj3[len] = str2[i];
+            ary4.push(str2[i]);
+            // obj3[w.length] = w
+            // //对象属性名为数字时，属性名会按照从小到大的顺序排列
+           }else{
+            continue;
+           }
+        }
+        let {log} = console;
+        log(obj3);// 1: "w", 2: "o", 3: "j", 4: "8", 5: "x", 7: "n", 17: "a"}
+        log(ary4); // ["h", "d", "8", "2", "n", "x", "a", "9", "3", "m", "e", "j", "c", "i", "o", "w"]
+       let keys = Object.keys(obj3);// 可以把对象的key拿出来是个数组
+       let vals = Object.values(obj3);// 可以把对象的value都拿出来，是个数组
+       console.log(keys[keys.length-1],vals[vals.length-1]); // 17 a
+       
+        // 正则
+        let key1 = '';
+        let num1 = 0;
+
+        str2 = str2.split('').sort().join('');
+        str2.replace(/([\da-z])\1+/g, ($0, $1) => {
+            if ($0.length > num1) {
+                num1 = $0.length;
+                key1 = $1;
+            }
+        })
+        console.log(`${key1}是出现最多的字符，出现次数是${num1}。`); // a是出现最多的字符，出现次数是17。
+
+
+
+    </script>
+</body>
+
+</html>
