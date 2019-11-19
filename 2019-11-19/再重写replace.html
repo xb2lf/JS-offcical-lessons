@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        
+         re:匹配的正则
+         str:整个字符串
+         cb:回调函数
+
+         返回的是一堆新的字符串
+
+         解决的是replace，第一个参数是正则，第二个参数是函数
+         */
+        let str = 'abacababcbacabc';
+        let re = /a/g;
+        function replace(str, re, cb) {
+            let str2 = ''; // 最后改变的结果
+            let ary = re.exec(str);// 让第一次能够进去while中(找到第一次的位置)
+            let rep = '';// 函数return的结果
+            let reAry = []; //每次返回要修改字符的数组
+            let num = 0;
+            let noREp = [];// 不替换的
+            while (ary) {
+                // console.log(ary);
+                let {index} = ary; // 解构出每次匹配的索引
+                reAry.push(cb(...ary, index, str));
+                noREp.push(str.substring(num,re.lastIndex-ary[0].length));
+                num = re.lastIndex;
+                ary = re.exec(str);
+            }
+            // 没修改的 + 修改的 = 最新的字符串
+           noREp.forEach((old,i) => {
+               str2 += (old + reAry[i]);
+           })
+           return str2;
+        }
+        let s = replace(str, /ba/g, function ($0,$1,$2,$3,$4,$5) {
+            console.log($0,$1,$2,$3,$4,$5);
+            return 'ac';
+        });
+        console.log(s);//'aaccaacbcac'
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 3000px">
+    <script>
+         /*
+    
+        第一个:（停下来才触发）  防抖
+            当频率很高触发事件的的时候都不执行事件函数中的代码，
+            只有停下来的时候再执行
+
+
+            debounce(回调函数,延迟多少时间)
+
+
+        第二个:（降频率） 节流
+            每隔固定时间执行一次事件函数中的代码（0-100  10）
+            
+            比如每隔200s
+        防抖(debounce) 和 节流(throttling) 
+    */ 
+    function fn(ev) {
+        console.log('触发了',ev,this); // 触发了 Event {isTrusted: true, type: "scroll", target: document, currentTarget: null, eventPhase: 0, …} #document
+
+    }
+    document.onscroll = debounce(fn,200);
+    function debounce(cb,time) {
+       let timer;
+       return function(...arg) {
+           // 当事件触发时的时候就先关闭上次的timer
+           if(timer) {
+               clearTimeout(timer);
+           }
+           timer = setTimeout(() => {
+               cb.call(this,...arg);
+           }, time);
+       }
+    }
+    </script>
+</body>
+</html>

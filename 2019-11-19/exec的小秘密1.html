@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    exec的小秘密
+     */
+
+    let str = 'abababab';
+    let re = /(a)/g;
+    console.log(re.exec(str));// ["a", "a", index: 0, input: "abababab", groups: undefined]
+    console.log(re.exec(str));// ["a", "a", index: 2, input: "abababab", groups: undefined]
+    console.log(re.exec(str));// ["a", "a", index: 4, input: "abababab", groups: undefined]
+    console.log(re.exec(str));// ["a", "a", index: 6, input: "abababab", groups: undefined]
+    console.log(re.exec(str));// null
+    </script>
+</body>
+</html>

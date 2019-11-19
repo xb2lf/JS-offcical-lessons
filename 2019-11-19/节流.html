@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height:3000px">
+    <script>
+    /*
+    
+        第一个:（停下来才触发）  防抖
+            当频率很高触发事件的的时候都不执行事件函数中的代码，
+            只有停下来的时候再执行
+
+
+            debounce(回调函数,延迟多少时间)
+
+
+        第二个:（降频率） 节流
+            每隔固定时间执行一次事件函数中的代码（0-100  10）
+            
+            比如每隔200s
+
+     防抖(debounce) 和 节流(throttling)    
+    */
+    function fn(ev){
+        // console.log(ev);
+        console.log('触发了节流',ev,this);
+    }
+    document.onscroll = throttling(fn,200);
+    function throttling(cb,time) {
+        let prevtime = 0; // 触发事件前的上一次时间初始值
+        return function(...arg) {
+            let nowtime = +new Date;// new Date前加（+）是让时间格式从基本字符串样式转换为时间戳(数字)
+            // console.log(nowtime - prevtime);
+            if(nowtime - prevtime > time) {
+                cb.call(this,...arg);
+            }
+            prevtime = nowtime;
+        }
+    }
+    /* 
+    document.onscroll = throttling(fn,200);
+    console.log(nowtime - prevtime);
+    经修改不同的阀值，进行测试，已生效
+    */
+     </script>
+</body>
+</html>

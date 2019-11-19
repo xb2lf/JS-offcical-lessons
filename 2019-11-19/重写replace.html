@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // str.replace(regexp|substr, newSubStr|function)
+        String.prototype.myReplace = function (arg1, arg2) {
+
+            // debugger
+            let str = this.slice();
+
+            if (typeof arg1 === 'string') { //第一个参数是string
+                let index = str.indexOf(arg1);
+                if (index == -1) return str; //没有找到arg1
+
+                let tmpa = str.substring(0, index);
+                let tmpb = str.substring(index + arg1.length);
+
+                if (typeof arg2 === 'string') { //第二个参数是string
+                    return tmpa + arg2 + tmpb;
+                } else if (typeof arg2 === 'function') { //第二个参数是function
+                    return tmpa + arg2(arg1, index, str) + tmpb;
+                }
+
+            } else if (arg1.constructor === RegExp) { //第一个参数是正则
+                let reg = arg1;
+                if (!str.match(reg)) return str; //没有匹配到
+
+
+                //如果正则没有g
+                if (!reg.global) {
+                    let matched = reg.exec(str); //匹配到的
+                    let index = matched.index; // 匹配到的值的索引
+                    let val = matched[0];  //匹配到的值
+                    let tmpa = str.substring(0, index);
+                    let tmpb = str.substring(index + val.length);
+                    let p = []; //正则匹配到的分组
+                    for (let i = 1; i < matched.length; i++) {
+                        p.push(matched[i]);
+                    }
+                    //第二个参数是string
+                    if (typeof arg2 === 'string') {
+                        return tmpa + arg2 + tmpb;
+                    } else if (typeof arg2 === 'function') { //第二个参数是function
+                        //match, p1, p2, p3, offset, string
+                        return tmpa + arg2(val, ...p, index, str) + tmpb;
+                    }
+                } else { //如果正则有g
+                    if (typeof arg2 === 'string') { //第二个参数是string
+                        let val = str.match(reg);
+                        return str.split(val[0]).join(arg2);
+                    } else if (typeof arg2 === 'function') { //第二个参数是function 
+                        let indexs = []; //匹配到的索引
+                        let vals = []; //匹配到的值
+                        let p = []; //所有分组
+                        while (true) {
+                            let matched = reg.exec(str);
+                            // console.log(matched)
+                            if (matched === null) break;
+                            vals.push(matched[0]);
+                            indexs.push(matched.index);
+                            let pp = []; //正则匹配到的分组
+                            for (let i = 1; i < matched.length; i++) {
+                                pp.push(matched[i]);
+                            }
+                            p.push(pp);
+                        }
+
+                        // console.log(indexs, vals, p)
+                        let ans = '';
+                        let ii = 0;
+                        for (let i = 0; i < vals.length; i++) {
+                            ans += str.substring(ii, indexs[i]);
+                            ii = indexs[i] + vals[i].length;
+                            //match, p1, p2, p3, offset, string
+                            //执行函数
+                            ans += arg2(vals[i], ...p[i], indexs[i], str);
+
+                        }
+                        ans += str.substring(ii);
+                        return ans;
+                    }
+                }
+                return str;
+            }
+        }
+
+        let str = 'hahah1123aha';
+        console.log(str.myReplace(/([a-z])(\d)/, function () {
+            console.log(arguments)
+            return 'w';
+        }));
+
+        console.log('------');
+        //内置replace
+        console.log(str.replace(/([a-z])(\d)/, function () {
+            console.log(arguments);
+            return 'w';
+        }))
+    </script>
+</body>
+</html>
