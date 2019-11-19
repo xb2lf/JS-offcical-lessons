@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        forEach(function(item,index,all){},that)  -> undefined
+
+        map(function(item,index,all){},that) -> 新数组，长度和旧数组一样
+
+        replace()
+            2个参数
+                第一个参数可以为正则也可以为字符串
+
+                第二个参数可以为字符串也可以为函数
+
+
+    */
+    let ary = [1,1,2,3,4];
+    Array.prototype.myForEach = function(callback,that) {
+      for (let i = 0; i < this.length; i++) {// this指代的是ary
+        callback.call(that,this[i],i,this);
+          
+      }
+    }
+      let r = ary.myForEach(function(item,index,all){
+        console.log(item,index,all,this);
+        return 5;
+    },document);// 这里默认window，修改为document
+    console.log(r); // undefined
+    </script>
+</body>
+</html>

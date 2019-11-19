@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    function fn(i) {
+        return function (n) {
+            console.log(n + (i++));
+        }
+    }
+    var f = fn(10);
+    // console.dir(f);
+    f(20);
+    fn(20)(40);
+    fn(30)(50);
+    f(30);
+
+        /*
+        由于子函数引用父函数参数，且子函数被外界调用，故形成闭包环境，
+
+             剖析：
+        预解析：形参赋值 && 变量提升
+           fn = function() {}
+           var f 
+        执行上下文
+        f = fn(10); // 故fn函数执行，i=10 返回一个函数 function (n) {console.log(n + (i++))}
+        f(20); //f执行，相当于fn执行后返回的函数执行，故形参赋值 n = 20
+        console.log(n + (i++)); // 20 + (10++) = 30 而i加一变为11 i =11
+        由于闭包环境，i的值不会被释放
+        fn(20)(40); 40 + (20++) =60 i =20+1 执行完后被释放
+        fn(30)(50); 50 + (30++) =80 i = 30+1 执行完后被释放
+         f(30); 由于闭包环境此时i未被释放的值只有一个就是11， 故：
+         n + (i++) => 30 + (11++) = 41 i=11+1=12
+
+        */
+    </script>
+</body>
+
+</html>

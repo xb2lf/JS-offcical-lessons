@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var x = 3,
+            obj = { x: 5 };
+        obj.fn = (function () {
+            this.x *= ++x;
+            return function (y) {
+                this.x *= (++x) + y;
+                console.log(x);
+            }
+        })();
+        var fn = obj.fn;
+        obj.fn(6);
+        fn(4);
+        console.log(obj.x, x);
+
+        /*
+        由于子函数引用父函数参数，且子函数被外界调用，故形成闭包环境，
+
+             剖析：
+        预解析：形参赋值 && 变量提升
+          var x
+          var obj
+          var fn
+        执行上下文
+        x = 3;
+        obj = {x；3}
+        obj.fn= (function(){}){} // 此处为一个函数自执行，匿名函数自执行的this是window  this.x *= ++x为3 = ++3 3*4=12  返回一个函数
+        fn = obj.fn //赋址  讲window.fn指向obj的fn
+        obj.fn(6); // 相当于fn执行后返回的函数执行 故y=16, this.x *= (++x) + y; 此处this指代obj，5 *= （++12）+6 5 *= 13+6 = 95
+        fn(4); 3 *= ++3 3 * 4 =12  13 *= （++12）+4  13 *= 14 +4=234
+
+        */
+    </script>
+</body>
+
+</html>

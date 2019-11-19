@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(a);
+        var a = 12;
+        function a() {
+            console.log(a);
+            a = 13;
+        }
+        a();
+        console.log(a);
+
+        /* 
+        
+             剖析：
+        预解析：形参赋值 && 变量提升
+           var a // 由于变量提升a被下边同名函数覆盖
+           a = function() {} 
+        执行上下文
+        console.log(a); //  a = function() {} 
+        var a = 12;  //  a = 12
+        a(); // a此时是数字（基本数据类型），不是方法也不是函数，不能调用，故报错a is not funciton
+        console.log(a); //  由于上边报错不再执行
+        */
+    </script>
+</body>
+
+</html>

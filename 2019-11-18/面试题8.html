@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function A() { alert(1); }
+        function Fn() {
+            A = function () {
+                alert(2);
+            };
+            return this;
+        }
+        Fn.A = A;
+        Fn.prototype = {
+            A: () => {
+                alert(3);
+            }
+        };
+        A();//1
+        Fn.A();//1
+        Fn().A();//2
+        new Fn.A();//1
+        new Fn().A();//3
+        new new Fn().A();//? 报错
+
+        /*
+        A(); // 直接调用，alert(1)
+        Fn.A(); // 由于此前 Fn.A = A,进行赋址，故也alert(1)
+        Fn().A();// 相当于Fn的实例下的A，自身有，进行调用，故 alert(2)
+        new Fn.A();// Fn.A()的实例，自身有，故alert(1)
+        new Fn().A();// 相当于Fn的A()的实例,自身没有，得通过Fn的原型找，故alert(3)
+        new new Fn().A();// 相当于Fn.prototype的A()的实例,找相对应的构造函数的原型的A(),没有，故报错A is not a constructor
+        */
+    </script>
+</body>
+
+</html>

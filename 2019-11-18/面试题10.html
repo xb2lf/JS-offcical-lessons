@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function A1(name) {
+            this.name = name;
+        }
+        function A2(name) {
+            this.name = name || 'Jerry';
+        }
+        function A3(name) {
+            name && (this.name = name);
+        }
+        A1.prototype.name = 'Tom';
+        A2.prototype.name = 'Tom';
+        A3.prototype.name = 'Tom';
+        //undefined + 'Jerry' + 'Tom' 
+        alert((new A1().name) + (new A2().name) + (new A3().name));
+
+        /*
+       new A1().name // A1的实例name，自身有，但并未形参赋值，故为undefined
+       new A2().name // A2的实例name，自身有，同样未形参赋值，但其中有判断条件this.name = name || 'Jerry' ，前边是fals看后边，选择'Jerry'
+       new A3().name // A3的实例name,同样未传参，有判断条件name && (this.name = name)，根据判断条件前边为false，不再看后边，相当于咩有，就从它的构造函数的原型上找，所以为'Tom'
+       alert((new A1().name) + (new A2().name) + (new A3().name));//undefined + 'Jerry' + 'Tom'  
+        */
+    </script>
+</body>
+
+</html>

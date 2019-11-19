@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var F = function () { };
+        Object.prototype.a = function () {
+            console.log('a()')
+        };
+        Function.prototype.b = function () {
+            console.log('b()')
+        };
+        var f = new F();
+        console.dir(Function);
+        f.a(); //'a()'
+        f.b();//报错
+        F.a();//'a()'
+        F.b();//'b()'
+
+        /*
+         var f = new F(); // 讲f作为F的实例
+         f.a(); // f自身没有a，得通过原型链一直向上查找，先找到构造函数的原型，构造函数的原型没有，然后通过原型的原型链找它的构造函数的原型是否有，刚好有，输出'(a)'
+         f.b(); // 同f.a()的分析过程，最后Object没有a，故报错f.b is not a function
+          F.a();  F.b(); // 由于上边报错，不再执行，没有输出结果，如果上边没有报错，则分别输出'a()','b()'  分析：此时F作为Function的一个实例，自身没有a或者b，只能通过原型链去他的构造函数的原型去找，而最终指向只有Function或者Objcet
+        */
+    </script>
+</body>
+
+</html>

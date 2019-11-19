@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Fn() {
+            this.x = 10;
+            this.y = 20;
+            this.getX = function () {
+                console.log(this.x);
+            }
+        }
+        Fn.prototype.y = 40;
+        Fn.prototype = {
+            x: 30,
+            getY: function () {
+                this.y += 1;
+                console.log(this.y);
+            },
+            sum: function () {
+                console.log(this.x + this.y);
+            }
+        };
+        let f1 = new Fn;
+        let f2 = new Fn;
+        console.log(f1.getX === f2.getX);
+        console.log(f1.getY === f2.getY);
+        console.log(f1.constructor);
+        f1.getX();
+        f2.getY();
+        f1.sum();
+
+        /*
+        let f1 = new Fn; => AAAFFF000
+        let f2 = new Fn; => AAAFFF111
+        f1.getX === f2.getX // f1和f2作为实例，自身有getX，但指向不同的堆内存，故为false
+        f1.getY === f2.getY // f1和f2作为实例，自身没有都getY，得通过原型链找构造的函数的原型上是否有getY,原型上有，指向相同的堆内存，故为ture
+        f1.constructor ->f1的构造函数是Fn，而Fn的原型被赋址一个对象，故f
+        1.constructor是Objcet
+        f1.getX();// f1自身有getX(console.log(this.x);) 这里this指代实例，故x为10
+        f2.getY();// f2自身没有getY，得通过原型链去找它构造函数的原型上是否有，刚好有(this.y += 1;console.log(this.y);),这里this指代的是实例，故y的值为20 20+1=20 故输出y为21
+
+        f1.sum();// f1自身没有sum，得通过原型链去找构造函数的原型上是否有，刚好有(console.log(this.x + this.y);),这里this指代的是实例，故 10+20 = 30
+        */
+    </script>
+</body>
+
+</html>

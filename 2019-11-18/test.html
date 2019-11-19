@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function A(){
+    alert(1);
+}
+function Fn() {
+    A=function(){
+       alert(2);
+    };
+    return this;
+}
+Fn.A=A;
+Fn.prototype={
+    A:()=>{
+       alert(3);
+    }
+};
+A();
+Fn.A();
+Fn().A();
+new Fn.A();
+new Fn().A();
+new new Fn().A();
+    </script>
+</body>
+</html>

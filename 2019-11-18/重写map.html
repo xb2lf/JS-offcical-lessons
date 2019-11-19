@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+        forEach(function(item,index,all){},that)  -> undefined
+
+        map(function(item,index,all){},that) -> 新数组，长度和旧数组一样
+
+        replace()
+            2个参数
+                第一个参数可以为正则也可以为字符串
+
+                第二个参数可以为字符串也可以为函数
+
+
+    */
+    let ary = [1,1,2,3,4];
+    Array.prototype.myMap = function (callback,that) {
+      let arr = [];
+      for (let i = 0; i < this.length; i++) {// this指代的是ary
+       arr.push(callback.call(that, this[i], i, this));
+
+      }
+      return arr;
+    }
+    let r = ary.myMap(function (item, index, all) {
+      console.log(this);
+      return '<li>' + item + '</li>';
+    },document);// 默认为window，修改为document
+
+    console.log(r);// ["<li>1</li>", "<li>1</li>", "<li>2</li>", "<li>3</li>", "<li>4</li>"]
+
+  </script>
+</body>
+
+</html>

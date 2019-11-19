@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var n = 0;
+        function a() {
+            var n = 10;
+            function b() {
+                n++;
+                console.log(n);
+            }
+            b();
+            return b;
+        }
+        var c = a();
+        c(); //12
+        console.log(n);
+
+        /*
+
+             剖析：
+        预解析：形参赋值 && 变量提升
+           var n
+           a = function() {}
+           var c
+        执行上下文
+         n = 0;
+         c = a();// 11
+
+         a() => 剖析
+         var n 
+         b = function () {}
+         n =10
+         b();=> n++ console.log(n); //11
+
+        c(); => n=11 c = b() {} 同上分析  输出n为12
+
+        console.log(n); // 最外层window.n未曾重新赋值，故输出0
+
+        */
+    </script>
+</body>
+
+</html>

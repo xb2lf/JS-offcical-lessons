@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a1 = 4, a2 = [1, 2];
+        function b(x, y) {
+            arguments[0] = 10;
+            arguments[1].push(3);
+            y = [];
+            console.log(x, y);
+        }
+        b(a1, a2);
+        console.log(a1, a2);
+
+        /*
+
+             剖析：
+        预解析：形参赋值 && 变量提升
+           var a1,a2
+           b= function() {}
+        执行上下文
+         a1 = 4;
+         a2 = [1,2];
+
+        b(a1,a2); => x= 4（a1 = 4）(赋值) y=[1,2] (a2 = [1, 2]) (赋址)     【arguments[0] = 10 => x = 10  arguments[1].push(3) => y = [1,2,3](同时 a2 = [1,2,3]) y = [] (y重新赋址) 输出x为10，y为空数组[] 】
+
+        console.log(a1,a2); // a1的值未曾重新赋值，还是4 a2和y同时指向一个堆内存（赋址），故a2为[1,2,3] 
+
+        */
+    </script>
+</body>
+
+</html>

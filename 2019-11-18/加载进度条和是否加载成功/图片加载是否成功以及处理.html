@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    const img = document.createElement('img');
+    img.src = './img/1x.jpg'; //路径中原图片名称为1.jpg，改为1x.jpg模拟图片加载不成功，以便进行测试和验证
+    img.onload = function () {// 图片加载成功后触发该事件
+      console.log('加载成功');
+    }
+    img.onerror = function() {// 图片加载失败后触发该事件
+        console.log('加载失败');
+        this.src = './img/timg.jpg';
+    }
+    box.append(img);
+    </script>
+</body>
+</html>
