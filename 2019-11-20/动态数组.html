@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script>
+    // let lis = document.getElementsByTagName('li');
+    let lis = document.querySelectorAll('li');
+    for(var i = 0;i<lis.length;i++) {
+        ul.appendChild(lis[i]);// dom操作都是剪切不是复制
+    }
+    console.log(lis); // li排序是<li>2</li> <li>4</li> <li>1</li> <li>3</li> 由于重新排序过程中是剪切而不是赋值，会造成类似数组塌陷的问题，所以循环添加后顺序并不是原先的顺序  而是2,4,3,1
+    </script>
+</body>
+</html>

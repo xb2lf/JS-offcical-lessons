@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script>
+        /* 
+        解除事件函数： 给元素会见赋值null即可
+        */
+    btn.onclick = function() {
+        alert(1);
+        btn.onclick = null;
+    }
+    </script>
+</body>
+</html>

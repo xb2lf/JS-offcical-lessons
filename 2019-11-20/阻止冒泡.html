@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        padding: 100px;
+    }
+    #box{
+      background: lightblue;
+    }
+    #box1{
+       background: darkorange; 
+    }
+    #box2{
+     background: lightgreen;
+    }
+    #btn{
+      background: darkorchid;
+    }
+    </style>
+</head>
+<body>
+    <div id='box'>
+        <div id="box1">
+            <div id="box2">   
+                <button id="btn">按钮</button>
+            </div>
+        </div>
+    </div>
+    <script>
+      box.onclick = function() {
+          alert('btn');
+      }
+      box1.onclick = function() {
+          alert('btn1');
+      }
+      box2.onclick = function() {
+          alert('btn2');
+      }
+      btn.onclick = function(ev) {
+          alert('btn');
+        ev.cancelBubble = true;
+      }
+      window.onclick = function() {
+          alert('window');
+      }
+    </script>
+</body>
+</html>

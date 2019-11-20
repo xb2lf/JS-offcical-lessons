@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点击创建</button>
+    <ul id="ul">
+        <li>1</li>
+    </ul>
+    <script>
+        // // getElements、children 都是动态获取
+        // let lis = document.getElementsByTagName('li'); // 动态获取
+        // // let lis = document.querySelectorAll('li'); // 静态获取
+        // let num = 1;
+        // btn.onclick = function () {
+        //     ul.innerHTML += '<li>' + (++num) + '</li>'; // 由于覆盖的原因，原先页面中的里被覆盖掉了
+        //     // lis = document.querySelectorAll('li'); // 静态获取
+        //     // console.log(lis.length);
+        //     for (let i = 0; i < lis.length; i++) {
+        //         lis[i].onclick = function() {
+        //             alert(this.innerHTML);
+        //         }
+                
+        //     }
+        // }
+
+
+          // getElements、children 都是动态获取
+          let lis = document.getElementsByTagName('li'); // 动态获取
+        // let lis = document.querySelectorAll('li'); // 静态获取
+        let num = 1;
+        btn.onclick = function () {
+            ul.innerHTML += '<li>' + (++num) + '</li>'; 
+        }
+        ul.onclick = function (ev) {
+            // console.log(ev.target);
+            if (ev.target.tagName === 'LI') {
+                ev.target.style.background = 'red';
+            }
+        }
+    </script>
+</body>
+
+</html>

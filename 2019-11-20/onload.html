@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    /* 整个页面输出顺序 先输出1，再输出3,最后输出2 */
+    window.onload = function() {
+        console.log(2);
+        const box = document.getElementById('box');
+        console.log(box);
+    }
+    console.log(1)
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    console.log(3);
+    console.dir(box);
+    </script>
+</body>
+</html>

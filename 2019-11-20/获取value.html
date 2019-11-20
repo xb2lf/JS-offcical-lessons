@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="txt" value="哈哈" placeholder="请输入狗子">
+    <script>
+        let val = txt.value;
+        txt.oninput = function () {
+            val = txt.value;
+            console.log(val);// 事件监控中才是用户输入的值 比如'123'
+        }
+        console.log(val); // 会一直是'哈哈',初始值
+    </script>
+</body>
+
+</html>
