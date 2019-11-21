@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 50px;
+            height: 50px;
+            background: orchid;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box2 {
+            width: 5px;
+            height: 5px;
+            background: seagreen;
+            border-radius: 50%;
+            position: absolute;
+            top: 0px;
+            left: 22px;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <div id="box2"></div> -->
+    </div>
+    <script>
+        /* 
+        w 87
+        a 65
+        s 83
+        d 68
+          作业：
+          1.做到切换的时候不卡
+          2.2个按键按下时斜着跑
+        */
+        let keyword = {};
+        document.addEventListener('keyup', function (ev) {
+            keyword[ev.keyCode] = false;
+        });
+        document.addEventListener('keydown', function (ev) {
+            keyword[ev.keyCode] = true;
+        });
+        setInterval(() => { 
+            for (const key in keyword) {
+                if (keyword[87]) {
+                    box.style.top = box.offsetTop - 5 + 'px'; // 向上移动
+                    if (keyword[65]) { // 上左移动
+                        box.style.top = box.offsetTop - 5 + 'px'; // 向上移动
+                        box.style.left = box.offsetLeft - 5 + 'px'; // 向左移动
+                    }
+                    if (keyword[68]) { // 上右移动
+                        box.style.top = box.offsetTop - 5 + 'px'; // 向上移动
+                        box.style.left = box.offsetLeft + 5 + 'px'; // 向右移动
+                    }
+                } else if (keyword[83]) {
+                    box.style.top = box.offsetTop + 5 + 'px'; // 向下移动
+                    if (keyword[65]) { // 下左移动
+                        box.style.top = box.offsetTop + 5 + 'px'; // 向下移动
+                        box.style.left = box.offsetLeft - 5 + 'px'; // 向左移动
+                    }
+                    if (keyword[68]) { // 下右移动
+                        box.style.top = box.offsetTop + 5 + 'px'; // 向下移动
+                        box.style.left = box.offsetLeft + 5 + 'px'; // 向右移动
+                    }
+                } else if (keyword[65]) {
+                    box.style.left = box.offsetLeft - 5 + 'px'; // 向左移动
+                    if (keyword[87]) { // 左上移动
+                        box.style.left = box.offsetLeft - 5 + 'px'; // 向左移动
+                        box.style.top = box.offsetTop - 5 + 'px'; // 向上移动
+                    }
+                    if (keyword[83]) { // 左下移动
+                        box.style.left = box.offsetLeft - 5 + 'px'; // 向左移动
+                        box.style.top = box.offsetTop + 5 + 'px'; // 向下移动
+                    }
+                } else if (keyword[68]) {
+                    box.style.left = box.offsetLeft + 5 + 'px'; // 向右移动
+                    if (keyword[87]) { // 右上移动
+                        box.style.left = box.offsetLeft + 5 + 'px'; // 向右移动
+                        box.style.top = box.offsetTop - 5 + 'px'; // 向上移动
+                    }
+                    if (keyword[83]) { // 右下移动
+                        box.style.left = box.offsetLeft + 5 + 'px'; // 向右移动
+                        box.style.top = box.offsetTop + 5 + 'px'; // 向下移动
+                    }
+                } else if (keyword[13]) {
+                    let div = document.createElement('div');
+                    div.className = 'box2';
+                    box.append(div);
+                    setTimeout(() => {
+                        div.style.top = -1000 + 'px';
+                    }, 0.5);
+                    // if (keyword[87]) {
+                    //     setTimeout(() => {
+                    //         console.log(div);
+                    //         div.style.top = -1000 + 'px';
+                    //     }, 0.5);
+                    //     box.style.top = box.offsetTop - 5 + 'px'; // 向上移动
+                    // }
+                    // if (keyword[83]) {
+                    //     setTimeout(() => {
+                    //         div.style.top = -1000 + 'px';
+                    //     }, 0.5);
+                    //     box.style.top = box.offsetTop + 5 + 'px'; // 向下移动
+                    // }
+                    // if (keyword[65]) {
+                    //     setTimeout(() => {
+                    //         div.style.top = -1000 + 'px';
+                    //     }, 0.5);
+                    //     box.style.left = box.offsetLeft - 5 + 'px'; // 向左移动
+                    // }
+                    // if (keyword[68]) {
+                    //     setTimeout(() => {
+                    //         div.style.top = -1000 + 'px';
+                    //     }, 0.5);
+                    //     box.style.left = box.offsetLeft + 5 + 'px'; // 向右移动
+                    // }
+                }
+            }
+        }, 50);
+    </script>
+</body>
+
+</html>
