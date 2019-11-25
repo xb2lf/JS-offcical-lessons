@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text id='txt'">
+    <script>
+    /* 
+    浏览器默认行为：
+       某些行为并不是人为做的，而是浏览器悄悄做的
+    
+    阻止事件默认行为
+
+       要阻止默认行为要知道是什么事件触发的这种行为
+
+       方案一： ev.returnValue = false 去阻止默认行为
+
+       方案二： return false;
+    
+     */
+     document.onkeydown = function (ev) {
+         console.log(ev.keyCode); // 32 空格
+         if (ev.keyCode === 32) {
+             return false;
+         }
+     }
+     txt.onkeydown = function (ev) {
+         ev.cancelBublle = true; // 阻止冒泡
+     }
+    </script>
+</body>
+</html>

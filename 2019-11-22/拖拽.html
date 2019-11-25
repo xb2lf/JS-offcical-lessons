@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: lightskyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+    /* 
+     三大事件组成：
+        onmousedown
+        onmousemove
+        omnouseup
+
+    先要触发down，才能触发move和up
+     */
+
+    box.onmousedown = function(ev) {
+        let disX = ev.pageX;// 鼠标按下时的X位置
+        let disY = ev.pageY;// 鼠标按下时的Y位置
+
+        let t = box.offsetTop; // box到定位父级（window）的距离
+        let l = box.offsetLeft; //box到定位父级（window）的距离
+        box.onmousemove = function(ev) {
+            box.style.left = (ev.pageX - disX) + l + 'px';// 此处ev.pageX是鼠标拖拽移动后停下来X的位置
+            box.style.top = (ev.pageY - disY) + t + 'px';// 此处ev.pageX是鼠标拖拽移动后停下来X的位置
+        }
+        box.onmouseup = function(ev) {
+            box.onmousemove = null;
+        }
+    }
+    </script>
+</body>
+
+</html>

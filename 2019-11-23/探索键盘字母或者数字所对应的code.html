@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    探索键盘字母或者数字所对应的code
+
+       根据键盘上每个按键所对应的键码值  然后的得到按键down下的事件对象的触发详细信息，然后找到数字或者字母中每个按键所对应的code值
+     */
+    // 第一轮数字  0-9
+    // document.onkeydown = function(ev) {
+    //    if(ev.keyCode === 48) {
+    //        console.log(ev.code); // Digit0
+    //    }
+    //    if(ev.keyCode === 49) {
+    //        console.log(ev.code); // Digit1
+    //    }
+    //    if(ev.keyCode === 50) {
+    //        console.log(ev.code); // Digit2
+    //    }
+    //    if(ev.keyCode === 51) {
+    //        console.log(ev.code);// Digit3
+    //    }
+    //    if(ev.keyCode === 52) {
+    //        console.log(ev.code);// Digit4
+    //    }
+    //    if(ev.keyCode === 53) {
+    //        console.log(ev.code);// Digit5
+    //    }
+    //    if(ev.keyCode === 54) {
+    //        console.log(ev.code);// Digit6
+    //    }
+    //    if(ev.keyCode === 55) {
+    //        console.log(ev.code);// Digit7
+    //    }
+    //    if(ev.keyCode === 56) {
+    //        console.log(ev.code);// Digit8
+    //    }
+    //    if(ev.keyCode === 57) {
+    //        console.log(ev.code);// Digit9
+    //    }
+
+    // }
+    // 第二轮  字母a-j
+    document.onkeydown = function(ev) {
+       if(ev.keyCode === 65) {
+           console.log(ev.code); // KeyA
+       }
+       if(ev.keyCode === 66) {
+           console.log(ev.code); // KeyB
+       }
+       if(ev.keyCode === 67) {
+           console.log(ev.code); // KeyC
+       }
+       if(ev.keyCode === 68) {
+           console.log(ev.code);// KeyD
+       }
+       if(ev.keyCode === 69) {
+           console.log(ev.code);// KeyE
+       }
+       if(ev.keyCode === 70) {
+           console.log(ev.code);// KeyF
+       }
+       if(ev.keyCode === 71) {
+           console.log(ev.code);// KeyG
+       }
+       if(ev.keyCode === 72) {
+           console.log(ev.code);// KeyH
+       }
+       if(ev.keyCode === 73) {
+           console.log(ev.code);// KeyI
+       }
+       if(ev.keyCode === 74) {
+           console.log(ev.code);// KeyK
+       }
+
+    }
+    </script>
+</body>
+</html>

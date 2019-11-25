@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    event -> window.event chrome默认为undefined  IE默认为null
+
+    var e = e || event;
+
+    var e = e || window.event;
+
+    ev.target  事件触发时的标签
+     */
+     document.onclick = function() {
+         console.log(event);
+     }
+    </script>
+</body>
+</html>

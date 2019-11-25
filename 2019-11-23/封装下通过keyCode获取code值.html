@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let str = '0123456789qwertyuioplkjhgfdsazxcvbnm';
+    function myGetCode(wd) {
+        document.onkeydown = function(ev) {
+        let  key = ev.key;
+        if(wd.includes(key)){
+            let reg = new RegExp(key);
+            if(reg.test(wd)) {
+            console.log(ev.key);
+        }
+            
+        }
+        
+       
+
+    }
+    }
+    myGetCode(str);
+    </script>
+</body>
+</html>

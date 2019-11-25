@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+    width: 100px;
+    height:100px;
+    background: lightseagreen;
+    position: absolute;
+    top:0;
+    left:0;
+}
+    </style>
+</head>
+<body>
+        <div id="box"></div>
+    <script>
+    /*
+        onscroll  滚动条改变的时候触发
+        onmousewheel  滚轮事件
+
+            ev.wheelDelta  检测滚动的方向
+                大于0就是向上的
+                小于0就是向下的
+
+
+        FF：DOMMouseScroll 
+            注意这个事件只能使用事件绑定的方式去写
+            ev.detail
+                大于0就是向下的
+                小于0就是向上的
+
+
+    */ 
+    window.onmousewheel = function(ev) {
+        if(ev.wheelDelta > 0) {
+            box.style.top = box.offsetTop - 5 + 'px'; // 滑轮上
+        }else{
+            box.style.top = box.offsetTop + 5 + 'px'; // 滑轮下
+        }
+    }
+    </script>
+</body>
+</html>

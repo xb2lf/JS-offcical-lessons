@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+    width: 100px;
+    height:100px;
+    background: lightseagreen;
+    position: absolute;
+    top:0;
+    left:0;
+}
+    </style>
+</head>
+<body>
+        <div id="box"></div>
+    <script>
+    /*
+        onscroll  滚动条改变的时候触发
+        onmousewheel  滚轮事件（这个事件在Chrome中存在，初始值为null，但在firefox没有这个事件，所以在firefox会输出undefined）
+
+            ev.wheelDelta  检测滚动的方向
+                大于0就是向上的
+                小于0就是向下的
+
+
+        FF：DOMMouseScroll 
+            注意这个事件只能使用事件绑定的方式去写
+            ev.detail
+                大于0就是向下的
+                小于0就是向上的
+
+
+    */ 
+  
+  function addWheel(obj,cb) {
+      if(obj.onmousewheel === null) {// 说明有这个事件是在Chrome中
+          obj.onmousewheel = listen;
+      }else{
+          obj.addEventListener('DOMMouseScroll',listen);
+      }
+      function listen(ev) {
+          let onoff = false; // 开关作用，默认是向下，true向上
+          // 使上下方向统一
+          if (ev.wheelDelta) { // ev.wheelDelta  检测滚动的方向在Chrome中存在，但Firefox没有，Firefox是ev.detail
+          onoff = ev.wheelDelta > 0 ? true : false;
+          }else{ // Firefox是ev.detail 在firefox中
+          onoff = ev.detail < 0 ? true : false;
+          }
+          cb.call(this,onoff);
+      }
+  }
+
+  addWheel(box,function(onoff) {
+      let {width,height} = getComputedStyle(this);
+      console.log(box.width,box.height);
+      if(onoff){
+            this.style.width = parseFloat(width) + 5 + 'px';
+            this.style.height = parseFloat(height) + 5 + 'px';
+        }else{
+            this.style.width = parseFloat(width) - 5 + 'px';
+            this.style.height = parseFloat(height) - 5 + 'px';
+        }
+  });
+    </script>
+</body>
+</html>
