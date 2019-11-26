@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+            <button>按钮</button>
+    </div>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    /* 
+    click
+    mouseover 
+    mouseout
+
+    hover:
+          onmouseenter
+          onmouseleave
+
+    jq中的所有事件,都是on来二次封装，jq的事件全部都是事件绑定
+
+    jq的事件对象都是二次封装的，如果要拿到真正的原生js事件对象
+    ev.originalEvent(原生事件对象)
+
+    jq中阻止冒泡和默认行为，直接`return false`即可
+
+    事件三大部分：
+        1.事件流
+        2.有哪些事件，他们是干嘛的
+        3.事件对象
+    */
+
+    $('#box').on('click.a',function(){
+        console.log(111);
+    });
+
+    $('#box').on('click.b',function(){
+        console.log(222)
+    });
+
+    //解绑
+    $('button').on('click',function(){
+        // $('#box').off('click.a');
+        console.log(222);
+        // return false;
+    });
+
+    $('button').mousedown(function(){return false;})
+
+    </script>
+</body>
+</html>

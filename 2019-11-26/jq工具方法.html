@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul"></ul>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    /* 
+    $.
+
+    $.each
+
+    $.ajax()
+
+    fetch('url').then(e=>e.json()).then(d=>d)
+    */
+    // fetch('./1.json').then(e=>e.json()).then(d=>console.log(d));
+
+    //拿数据简单，难的是拿到数据怎么办
+    $.ajax({
+        url:'./1.json',
+        success:function(d){
+            console.log(d);
+        }
+    });
+
+    </script>
+</body>
+</html>

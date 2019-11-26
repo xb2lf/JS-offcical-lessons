@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul></ul>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+       // https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1462,21099,18560,29567,29700,29220,26350&wd=s&req=2&csor=1&cb=fn
+    
+
+    $.ajax({
+        url:'https://www.baidu.com/sugrec?',
+        data:{
+            prod:'pc',
+            sugsid:'1462,21099,18560,29567,29700,29220,26350',
+            wd:'今天多少度'
+        },
+        dataType:'jsonp',
+        success:function(d){
+            // console.log(d);
+            d.g.forEach(item=>{
+                let $li = $('<li>'+ item.q +'</li>');
+                $('#ul').append($li);
+            })
+        }
+    });
+    </script>
+</body>
+</html>
