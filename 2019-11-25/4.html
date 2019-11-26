@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <input type="button" value="按钮" class="am"/>
+        <input type="button" value="按钮" class="am"/>
+        <input type="button" value="按钮" class="am"/>
+        <input type="button" value="按钮" class="am"/>
+        <input type="text" class="ag"/>
+        <input type="checkbox" class="ac"/>
+        <input type="checkbox" class="ac"/>
+        <input type="checkbox" class="ac"/>
+        <input type="radio" class="ab"/>
+        <input type="password" class="aba"/>
+        <input type="time" class="b"/>
+        <input type="date" class="ab"/>
+        <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $('input[type="button"]').click(function() {
+            $(this).val('按钮2');
+        });
+        $('input[type != "button"]').click(function() {
+            alert(this.value);
+        })
+        console.log($('input[class$="b"]'));
+        $(':button').click(function() {
+            console.log($(':checked'));// 选中的input
+        })
+    </script>
+</body>
+</html>

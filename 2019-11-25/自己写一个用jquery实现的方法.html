@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <div id="box"></div>
+    <script>
+    /*
+        css('')  获取
+        css({})  批量设置
+        css('key','val')
+    */
+   ;(function(global,factory) {
+       factory(global);
+   })(this,function(global,NoGlobal) {
+       function myQuery (selector) {
+           return new fn.init(selector);
+       }
+       let fn = myQuery.prototype = {
+           v: 'x.0',
+           constructor:myQuery,
+           isObject(val){
+               return val !== null && typeof val === 'object';
+           },
+           css:function(...arg) {
+             let len = arg.length;
+             // 不带单位的
+             let re = ['background','color','opacity','position','display'];
+             let ary = Object.values(this);// 元素节点 ，每个li
+            //  console.log(ary);
+             if(len === 1) {// 当css方法只有一个参数时，存在两种情况，或者是获取属性值，或者是批量设置style
+                if(typeof arg[0] === 'string') { // 获取
+                    return getComputedStyle(this[0])[arg[0]];
+                }else if(this.isObject(arg[0])){
+                        let arr = Object.keys(arg[0]); // 外面传的对象
+                        // console.log(arr);
+                        // 批量设置
+                        ary.forEach((ele,i) => {
+                            arr.forEach((attr) => {
+                                // console.log(attr,arg[0][attr]);
+                                if(typeof arg[1] === 'number'){
+                                    if(new RegExp(re.join('|')).test(attr)){
+                                        ele.style[attr] = arg[0][attr];
+                                    }else{
+                                        ele.style[attr] = arg[0][attr] + 'px';
+                                    }
+                                }else{
+                                    ele.style[attr] = arg[0][attr];
+                                }
+                            });
+                        });
+                }
+
+             }else if(len === 2) {// css方法中有两个参数时，直接设置style
+                ary.forEach((ele,i) => {
+                  if(typeof arg[1] === 'number') {// 当设定的是style值为number类型时
+                      if(new RegExp(re.join('|')).test(arg[0])) {// 将re以"|"分割为字符串（| 正则中的或），然后以正则规则进行匹配
+                          ele.style[arg[0]] = arg[1];
+                      }else{
+                        ele.style[arg[0]] = arg[1] + 'px';
+                      }
+                  }else{
+                    ele.style[arg[0]] = arg[1];
+                  }
+                });
+
+             }
+             return this; // 链式调用
+           }
+       }
+       fn.init = function(selector) {
+           let ele = document.querySelectorAll(selector);
+           ele.forEach((ele,i) => this[i] = ele);
+       }
+       fn.init.prototype = fn;
+       window.$ = myQuery;
+   });
+    // $('#box')//{0:div,1:div}
+    // console.log( $('li').css('width',200) );
+    // $('li').css('background','red')
+
+    // console.log($('li').css('width'));
+
+    $('li').css({
+        width:200,
+        height:'100px',
+        background:'red',
+        opacity:.5
+    }).css('border','1px solid #000');
+
+    // $('div').css('height',200); // 生效
+
+    </script>
+</body>
+</html>

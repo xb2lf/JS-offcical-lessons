@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <ul id="ul1">
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+                <li>1</li>
+            </ul>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+    // even偶数，但js从0开始计数（所以实际上它代表的是奇数行）
+    $('#ul1 li:even').css('background','red');
+    $('#ul1 li:odd').css('background','green');
+    </script>
+</body>
+</html>

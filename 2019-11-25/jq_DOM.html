@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">添加</button>
+    <ul id="ul"></ul>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    /* 
+    DOM -> 文档对象模型
+
+    增删改查   
+       添加元素：
+          $('<li></i>')
+
+    关系  父子、祖先关系、祖孙关系
+
+    回流和重绘
+
+    盒子模型
+
+    jquery都可以链式调用
+    parent.prepend(child) 等同于insertBefore
+    */  
+   let num = 0; 
+   $('#btn').click(function () {
+    //  console.log( $('<li></i>'));
+    //  console.log( $('<li></i>')[0]);
+    //     console.log( $('<li>')[0]);
+
+    // $('#ul').append($('<li>' + ++num +'</li>').css({
+    //          width:30,
+    //          height:30
+    // }))
+
+   let $li = $('<li>' + ++num +'</li>').css({
+             width:30,
+             height:30
+    });
+    $li.click(function() {
+        $(this).remove();
+    })
+    // 一个是给ul添加样式，一个是给li添加样式
+    // $('#ul').append($li).css('border','1px solid #000'); // $li.appendto($('#ul'));
+    // $li.appendTo($('#ul')).css('border','1px solid #000');
+
+    // $('#ul').append($li); // 每天都添加父元素内的末尾
+    $('#ul').prepend($li); // 每次都U添加到父元素内的最前边
+   });
+    </script>
+</body>
+</html>

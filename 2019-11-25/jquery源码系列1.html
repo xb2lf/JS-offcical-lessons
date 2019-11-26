@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        (function (global, factory) {
+            factory(global);
+        })(this, function (global, NoGlobal) {
+            function myQuery() {
+                return new fn.init;
+            }
+            let fn = myQuery.prototype = {
+                v: 'x.0',
+                constructor: myQuery,
+                css: function () {
+                    console.log(1);
+                }
+            }
+            fn.init = function () {
+
+            }
+            fn.init.prototype = myQuery.prototype;
+            window.myQuery = $ = myQuery;
+        })
+        $().css();
+
+
+        /*
+        低版本中undefined会被修改
+    */
+//    var undefined = 1;
+//    console.log(undefined); //低版本浏览器下，undefined就是1,undefined容易被修改，所以NoGlobal的意思就是不会被修改的undefined
+    </script>
+</body>
+
+</html>
