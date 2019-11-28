@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery.min.js"></script>
+    <script>
+     function myFetch(url) {
+         return new Promise(function(resolve,reject) {
+             $.ajax({
+                 url,
+                 success:function(data) {
+                     resolve(data);
+                 },
+                 error:reject
+             });
+         })
+     }
+    //race 在数组中只要有一个异步成功就返回这次成功的结果，all是数组中的异步操作都要成功才返回成功结果
+    //  let p = Promise.race([myFetch('2.json','1.json')]);
+
+    let p = myFetch('1.json');
+    p.then(d => {
+        console.log(d);// '[{name: "尹德智"}]'
+        console.log(d[0].name);// '尹德智'
+    });
+    </script>
+</body>
+</html>

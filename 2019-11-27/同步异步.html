@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    
+    JS按理来说是从上往下解读代码，它是单线程的(同一时间只能做同一件事情)
+
+    事件调用 -> 把任务交给了事件引擎(所有的js事件全部都是异步的)
+
+    同步：
+       代码从上往下依次执行，如果一个地方卡住了，下面的代码就不执行了
+       
+    异步：
+       虽然从上往下依次执行，如果一个地方卡住了，不会阻止代码向下执行
+       包括：
+           定时器、所有的事件 promise
+
+           promise是个异步  微任务
+           
+           定时器 事件 宏任务
+           宏任务和微任务
+
+           异步的操作是不容易进行维护和开发的，同步操作才利于维护开发（上面的代码执行完才会执行下面的，有序的）
+
+           promise是解决异步编程问题的（也就是说，让异步的代码同步执行）
+
+
+           js先执行主线程的代码，如果主线程有异步代码，比如定时器，promise或者事件，那么会把异步代码放到异步队列中存储，当异步代码的条件成立的时候，把异步代码压入到主线程中执行，压入的方式是如果有微任务时就先执行微任务，执行完微任务再执行宏任务。当主线程空间的时候执行压入的代码，执行完成之后再从异步队列中压入异步代码到主线程中，这个过程中叫事件循环
+
+           注意的是执行完微任务是第一层的，如果在宏任务开一个微任务，那么先执行宏任务，再执行宏任务中的微任务
+
+          
+    */ 
+let a = 10;
+  
+   
+// document.onclick = function () {
+//     console.log(a);   
+// }
+
+let p = new Promise((rej,res) => {
+     rej(5);
+})
+p.then((d) => {
+  a= 20;
+  console.log(d,'promise');// 5 "promise"
+})
+console.log(a,1111);   
+    
+
+//    let a = 10;
+//    (function a() {
+//        a = 20;
+//        console.log(a);// 输出的是是一个函数 ƒ a() {a = 20 console.log(a); }
+//    })()
+    </script>
+</body>
+</html>

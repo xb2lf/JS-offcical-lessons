@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    // https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574922989532&di=2f0cc9ab6ac5b0a24f03e4142681a024&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2For56RieEZLZDY6WIKc9ml8wf92FEqLmgfTdbjjlA7MIu91510367213392.jpg
+    // https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574923017852&di=a999e01a79dcbf4ceb52621d0cdb5b06&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2Fe7lUIolRyFXVvwI7KPbGnmUpSlwWEOodj2a0kmklT00g11537710046284.jpg
+    // https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574923111295&di=2b1a32fa430c004836882d5fb8d593c0&imgtype=0&src=http%3A%2F%2Fdownhdlogo.yy.com%2Fhdlogo%2F640640%2F640%2F640%2F76%2F1581761802%2Fu1581761802UtKOajr.jpeg
+
+    function promisePic(url) {
+        return new Promise((resolve,reject) => {
+            let img = document.createElement('img');
+            img.src = url;
+            img.onload = function() {
+                resolve(img);
+            }
+            img.onerror = function() {
+                reject('错误');
+            }
+        });   
+    }
+
+    let p1 = promisePic('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574922989532&di=2f0cc9ab6ac5b0a24f03e4142681a024&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2For56RieEZLZDY6WIKc9ml8wf92FEqLmgfTdbjjlA7MIu91510367213392.jpg');
+
+    let p2 = promisePic('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574923017852&di=a999e01a79dcbf4ceb52621d0cdb5b06&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2Fe7lUIolRyFXVvwI7KPbGnmUpSlwWEOodj2a0kmklT00g11537710046284.jpg');
+
+    Promise.all([p1,p2]).then(([a,b]) => {
+        box.append(a);
+        box.append(b);
+        return promisePic('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574923111295&di=2b1a32fa430c004836882d5fb8d593c0&imgtype=0&src=http%3A%2F%2Fdownhdlogo.yy.com%2Fhdlogo%2F640640%2F640%2F640%2F76%2F1581761802%2Fu1581761802UtKOajr.jpeg')
+
+    },() => {
+        console.log('发生错误');
+    }).then((img) => {
+        box.append(img);
+    }, () => {
+        console.log('再次发生错误');
+    })
+    </script>
+</body>
+</html>
