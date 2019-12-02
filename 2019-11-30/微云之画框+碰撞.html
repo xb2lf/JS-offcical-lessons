@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 0;
+            height: 0;
+            background: rgba(9, 170, 255, 0.1);
+            border: 1px dashed #09AAFF;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            top: 300px;
+            left: 300px;
+        }
+
+        #box3 {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            top: 300px;
+            left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="box2" class="b"></div>
+    <div id="box3" class="b"></div>
+    <script src="./impact.js"></script>
+    <script>
+        class Drag {
+            constructor(id) {
+                this.disX = this.disY = 0;
+                this.box = document.getElementById(id);
+                this.b = document.querySelectorAll('.b')
+            }
+
+            init() {
+                document.addEventListener('mousedown', this.d = this.down.bind(this));
+
+            }
+            down(ev) {
+                let { left, top } = this.box.getBoundingClientRect();
+                this.disX = ev.pageX;
+                this.disY = ev.pageY;
+                this.box.style.display = 'block';
+                // 鼠标按下的时候让box的位置等于鼠标按下的位置
+                this.box.style.left = this.disX + 'px';
+                this.box.style.top = this.disY + 'px';
+                document.addEventListener('mousemove', this.mv = this.move.bind(this));
+                document.addEventListener('mouseup', this.u = this.up.bind(this));
+            }
+
+            move(ev) {
+                /*
+                鼠标往右移动left和top是不动的
+                鼠标往左移动left和top值才有变化
+
+                 move的值 - down的值如果大于0，就是右边，否则就是左边
+
+                但是我们又发现了另一个突破点，就是按下的值和移动的值比
+
+                如果说，按下的值比移动的大，那么left值就是移动的值
+                如果说，移动的值比按下的值大，那么left值就是按下的值
+                所以得到下面的公式。
+            */
+                this.box.style.left = Math.min(ev.pageX, this.disX) + 'px';
+                this.box.style.top = Math.min(ev.pageY, this.disY) + 'px';
+                // box的初始宽高为零，移动的鼠标左右上下移动的距离就是box的实际宽高
+                //移动的距离 - 按下的距离 = 移动了多少距离
+                this.box.style.width = Math.abs(ev.pageX - this.disX) + 'px';
+                this.box.style.height = Math.abs(ev.pageY - this.disY) + 'px';
+
+                this.b.forEach(ele => {
+                    if(impact(box,ele)) {
+                        ele.style.background = 'greenyellow';
+                    }else{
+                        ele.style.background = 'skyblue'; 
+                    }
+                })
+            }
+
+            up() {
+                this.box.style.width = this.box.style.height = 0;
+                this.box.style.display = 'none';
+                this.b.forEach(ele => {
+                    ele.style.background = 'skyblue';
+                })
+                document.removeEventListener('mousemove', this.mv);
+                document.removeEventListener('mouseup', this.u);
+            }
+        }
+
+        let d = new Drag('box');
+        d.init();
+    </script>
+</body>
+
+</html>

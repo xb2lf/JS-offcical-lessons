@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        top:0;
+        left: 0;
+    }
+    #box2{
+        width: 100px;
+        height: 100px;
+        background: skyblue;
+        position: absolute;
+        top: 300px;
+        left: 300px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <script>
+    box.addEventListener('mousedown',function(ev) {
+        let {left,top:t} = this.getBoundingClientRect();
+        let disX = ev.pageX - left;
+        let disY = ev.pageY - t;
+
+        function mv(ev) {
+            let l = ev.pageX - disX;
+            let t = ev.pageY - disY;
+            let r = l + box.offsetWidth;
+            let b = t + box.offsetHeight;
+            let {left:l2,top:t2,bottom:b2,right:r2} = box2.getBoundingClientRect();
+
+            if(r < l2 || b < t2 || l > r2 || t > b2) {
+                console.log('没碰到');
+                box2.style.background = 'skyblue';
+            }else{
+                console.log('碰到');
+                box2.style.background = 'pink';
+            }
+            box.style.cssText = `left:${l}px;top:${t}px`;
+        }
+
+    function up(ev) {
+          document.removeEventListener('mousemove',mv); // 解除函数
+          document.removeEventListener('mouseup',up); //解除函数
+    }
+
+    document.addEventListener('mousemove',mv); // 绑定函数
+    document.addEventListener('mouseup',up); //绑定函数
+
+    ev.preventDefault(); // DOM2阻止系统默认行为
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <div id="box">
+        <!-- <div class="folder">
+            <img src="./img/folder-b.png" alt="">
+            <input type="text" name="" id="">
+            <p>新建文件夹</p>
+        </div> -->
+    </div>
+    <script src="./jquery.min.js"></script>
+    <script>
+    let ary = [
+        {
+            title:'新建文件夹',
+            id:0
+        },
+        {
+            title:'新建文件夹(1)',
+            id:1
+        }
+    ]
+
+    // 1.生成页面基本内容（渲染页面）
+
+    function render(arr) {
+       $('#box').html('');// 将box的innerHTML初始设为空
+       $.each(arr,(i,item) => {
+           // 创建文件夹
+           let $folder = $(`<div class="folder">
+            <img src="./img/folder-b.png" alt="">
+            <input type="text" name="" id="">
+            <p>${item.title}</p>`);
+            $folder.find('input').hide();
+            $('#box').append($folder);
+       })
+    }
+    render(ary);
+
+    // 2.点击按钮创建新文件夹
+    // 先在box中创建一个folder的元素，然后当folder中的input失焦之后再添加数据到ary中
+    // 然后通过最新的ary渲染页面即可
+
+    $('#btn').click(function () {
+        let $folder = $(`<div class="folder">
+         <img src="./img/folder-b.png">
+         <input type="text" placeholder="请设置文件名" value="新建文件夹"/>
+        </div>`);
+        $('#box').append($folder);
+        // 先插入后聚焦
+        let $txt = $folder.find('input');
+        $txt.select();// 选中聚焦
+        $txt.blur(function () {// 当输入框失焦后，用户输入完成之后，进行一系列逻辑处理
+            let val = $txt.val();// 获取输入框中用户输入的内容
+            let bool = ary.map(item => item.title).includes(val);// 看下用户所设置文件名是否重复
+            let nval = '';// 为文件名设置一个动态变化的新值
+            let num = 1;// 用来同名文件名递增使用
+            nval = val; // 把input中用户的输入的value给最新的value（最新的value就是最新的结果）
+            while(bool) {
+                let s = val.replace(/\(\d\)$/,'') + '(' + num++ + ')'; // 如果有重名的文件名先把文件名后边带的“(数字)”去掉，然后重新递增动态命名文件名
+                bool = ary.map(item => item.title).includes(s);
+                nval = s;
+            }
+            ary.push({
+                id: +new Date,// 用某种数学方法给每一个文件夹一个唯一的id
+                title:nval
+            });
+            render(ary);// 当用户新建文件夹后，重新渲染页面
+        })
+    })
+    </script>
+</body>
+</html>

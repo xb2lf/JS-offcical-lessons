@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        top:0;
+        left: 0;
+    }
+    #box2{
+        width: 100px;
+        height: 100px;
+        background: skyblue;
+        position: absolute;
+        top: 300px;
+        left: 300px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <script src="./impact.js"></script>
+    <script>
+    /* 
+   将封装好的碰撞引入，然后直接调用
+   */
+   box.addEventListener('mousedown',function(ev){
+        let {left,top:t} = this.getBoundingClientRect();
+        let disX = ev.pageX - left;
+        let disY = ev.pageY - t;
+
+        function mv(ev){
+            if(impact(box,box2)){
+                box2.style.background = 'pink';
+            }else{
+                box2.style.background = 'skyblue';
+            }   
+
+            box.style.cssText = `left:${ev.pageX - disX}px;top:${ ev.pageY - disY}px;`;
+        }
+        function up(ev){
+            document.removeEventListener('mousemove',mv); //解除函数
+            document.removeEventListener('mouseup',up);//解除函数
+        }
+        document.addEventListener('mousemove',mv); //绑定函数
+        document.addEventListener('mouseup',up);//绑定函数
+
+        ev.preventDefault();
+    });
+    </script>
+</body>
+</html>

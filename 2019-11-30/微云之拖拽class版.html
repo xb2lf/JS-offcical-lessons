@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: lightsalmon;
+            border: 1px dashed greenyellow;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* display: none; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        class Drag {
+            constructor(id) {
+                this.disX = this.disY = 0;
+                this.box = document.getElementById(id);
+            }
+
+            init() {
+                this.box.addEventListener('mousedown', this.d = this.down.bind(this));
+
+            }
+            down(ev) {
+                let { left, top } = this.box.getBoundingClientRect();
+                this.disX = ev.pageX - left;
+                this.disY = ev.pageY - top;
+                document.addEventListener('mousemove', this.mv = this.move.bind(this));
+                document.addEventListener('mouseup', this.u = this.up.bind(this));
+            }
+
+            move(ev) {
+                this.box.style.left = ev.pageX - this.disX + 'px';
+                this.box.style.top = ev.pageY - this.disY + 'px';
+            }
+
+            up() {
+                document.removeEventListener('mousemove', this.mv);
+                document.removeEventListener('mouseup', this.u);
+            }
+        }
+
+        let d = new Drag('box');
+        d.init();
+    </script>
+</body>
+
+</html>
