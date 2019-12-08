@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>蕃薯云盘</title>
+    <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="app">
+        <div class="container">
+            <div class="head public">
+                <div class="headLeft">
+                    <a href="#">
+                        <img src="./images/logo.jpg" alt="">
+                    </a>
+                    <h2>蕃薯云盘</h2>
+                </div>
+                <div class="headRight">
+                    <ul class="head_nav">
+                        <li><a href="#">文件</a></li>
+                        <li><a href="#">动态</a></li>
+                        <li><a href="#">资源</a></li>
+                        <li><a href="#">更多</a></li>
+                    </ul>
+                    <div class="user">
+                        <div class="userpic">
+                            <img src="./images/user.jpg" alt="">
+                        </div>
+                        <p class="username">唯独青草微微</p>
+                        <i class="iconfont icon-arrow-top1 down1"></i>
+                        <i class="iconfont icon-arrow-top top1"></i>
+                        <i class="bar"></i>
+                        <i class="iconfont icon-shezhi setting"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="nav public">
+                <div class="navLeft">
+                    <ul class="navList">
+                        <li id="down">
+                            <i class="iconfont icon-xiazai"></i>
+                            下载
+                        </li>
+                        <li id="share">
+                            <i class="iconfont icon-fenxiang"></i>
+                            分享
+                        </li>
+                        <li id="move">
+                            <i class="iconfont icon-tubiaomoban-"></i>
+                            移动到
+                        </li>
+                        <li id="rename">
+                            <i class="iconfont icon-zhongmingming"></i>
+                            重命名
+                        </li>
+                        <li id=delete>
+                            <i class="iconfont icon-shanchu"></i>
+                            删除
+                        </li>
+                        <li id="newcreate">
+                            <i class="iconfont icon-xinjianwenjianjia"></i>
+                            新建文件夹
+                        </li>
+                        <li>
+                            <i class="iconfont icon-shuaxin"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navRight">
+                    <div class="listShow">
+                        <i class="iconfont icon-icon--"></i>
+                    </div>
+                    <div class="listTab">
+                        <i class="iconfont icon-suolvetu"></i>
+                        <i class="iconfont icon-arrowdown down2"></i>
+                        <i class="iconfont icon-xiangshangjiantouarrowup top2"></i>
+                        <ul>
+                            <li>按时间排列</li>
+                            <li>按字母排列</li>
+                            <li>显示缩略图</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="main">
+                <div class="menuList fix">
+                    <ul class="menuArea">
+                        <li>
+                            <div class="firstmenu">
+                                <i class="iconfont icon-quanbuwenjian allfile"></i>
+                                <span>全部文件</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="childmenu myshare">
+                        <i class="iconfont icon-fenxiang1"></i>
+                                <span>我的分享</span>
+                    </div>
+                    <div class="childmenu recycled">
+                        <i class="iconfont icon-huishouzhan"></i>
+                        <span>回收站</span>
+                    </div>
+                </div>
+                <div class="fileArea">
+                    <div class="breadmenu">
+                        <div class="checkall">
+                            <i id="checkedAll" class="checkedAll"></i>
+                            <i id="dui1" class="iconfont icon-duihao"></i>
+                        </div>
+                        <div class="bread-nav" onselectstart="return false;">
+                            <!-- 这个是操作的东西 -->
+                            <!-- <a href="javascript">全部文件</a>
+                                                <span>我的文档</span> -->
+                        </div>
+                    </div>
+                    <div id="yj-list">
+                        <span class="nc">新建文件夹</span>
+                        <span class="mv">移动到</span>
+                        <span class="de">删除</span>
+                        <span class="rn">重命名</span>
+                        <span class="sh">分享</span>
+                    </div>
+                    <div id="fBox">
+                        <div class="folders" id="folders">
+                            <!-- 这个是操作的东西 -->
+                            <!-- <div class="file-item active">
+                                <img src="images/folder-b.png" alt="" />
+                                <span class="folder-name">JS基础课程</span>
+                                <input type="text" class="editor" />
+                                <div class="checked"></div>
+                                <i id="dui2" class="iconfont icon-duihao"></i> -->
+                        </div>
+                        <div class="kuang" id="kuang"></div>
+                    </div>
+                    <div class="f-empty"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-tree">
+            <h2>选择存储位置</h2>
+            <p class="folderName">全部文件</p>
+            <div class="content">
+                    <ul id="model_list" class="model_list">
+                            <li>
+                                <div class="tree-title tree-ico open">
+                                    <i class="iconfont icon-quanbuwenjian allfile"></i>
+                                    <span>全部文件</span>
+                                </div>
+                            </li>
+                        </ul>
+            </div>
+            <div class="footer">
+                <input type="button" name="" class="cancel" value="取消">
+                <input type="button" name="" class="ok" value="确定">
+                <p class="tip"></p>
+            </div>
+            <i class="icon_close"></i>
+        </div>
+        <!-- 弹框 -->
+
+        <!-- 删除文件 -->
+        <div id="tanbox" class="tanbox">
+            <div class="conf">
+                <h3 class="conf-title">删除文件</h3>
+                <i class="iconfont icon-lt-icon-close iclose"></i>
+                <div class="conf-content">
+                    <i class="iconfont icon-i"></i>
+                    确定要删除这个文件吗？
+                </div>
+                <div class="conf-btn">
+                    <a href="javascript:;" class="sure">确定</a>
+                    <a href="javascript:;" class="cancel">取消</a>
+                </div>
+            </div>
+        </div>
+        <!-- 新建文件夹成功提醒 -->
+        <div class="full-tip-box">
+            <span class="full-tip">
+                <span class="inner">
+                    <i class="iconfont icon--yes2"></i>
+                    <span class="tip-text">新建文件夹成功</span>
+                </span>
+            </span>
+        </div>
+
+        <!-- 删除文件夹成功提醒 -->
+        <div class="del-tip-box">
+            <span class="full-tip">
+                <span class="inner">
+                    <i class="iconfont icon--yes2"></i>
+                    <span class="tip-text">删除文件夹成功</span>
+                </span>
+            </span>
+        </div>
+
+        <div class="container">
+            <div class="foot">
+
+            </div>
+        </div>
+    </div>
+    <script src="./js/sql/data.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/tool.js"></script>
+    <script src="./js/breadmenu/breadmenu.js"></script>
+    <script src="./js/folders/folders.js"></script>
+    <script src="./js/navLeft/navLeft.js"></script>
+    <script src="./js/kuang/kuang.js"></script>
+    <script src="./js/tree/tree.js"></script>
+    <script src="./js/yj_list/yj_list.js"></script>
+</body>
+
+</html>
