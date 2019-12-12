@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box {
+        width: 100px;
+        height: 100px;
+        background: lightsalmon;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="./tween.js"></script>
+    <script>
+    /* 
+    封装后所具备特性：
+       易用性
+       默认值
+       可扩展
+       极致的性能
+
+       animate({
+            width:100,
+            height:100
+        })
+    
+    */
+
+    box.onclick = function (){
+        // alert(1)
+        move({
+            el:box,
+            attr:'width',
+            time:1000,
+            count:200,
+            cb:function(){
+                console.log('运动完了');
+            }
+        });
+
+        move({
+            el:box,
+            attr:'height',
+            count:200,
+            time:1000
+        });
+
+    }
+
+    //解构赋值,有配置走配置，没配置走默认
+    function move({
+        el:obj=null,
+        attr='left',
+        time:d=500, //默认时间为500ms
+        count:c= 100, // 到100的位置
+        cb=function(){}
+    }) {
+        let t = 0;
+        let b = parseFloat(getComputedStyle(obj)[attr]);//obj表示元素，attr(left,right,top,bottom)带单位的属性
+        c = c - b;// 运动总长度 - 开始的位置 = 运动的步长
+        (function start() {
+            obj.timer = requestAnimationFrame(function() {
+                start();
+                t += 16.7;// 每16.7毫米运动一次
+            //如果当前累计的时间大于等于总时间，那么就让这个时间值等于总时长，以便停下来的距离和设置的距离保持一致
+            if (t >= d) {
+                t =d ;
+            }
+            obj.style[attr] = c*(t/d) + b + 'px';//c*(t/d) + b + 'px';在当前时间走了多少步长
+            if(t === 0) {
+                cancelAnimationFrame(obj.timer);
+                cb();
+            }
+            });
+        })();
+    }
+    </script>
+</body>
+</html>

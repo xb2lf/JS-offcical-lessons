@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     #box{
+        width: 100px;
+        height: 100px;
+        background: darkorange;
+        position: absolute;
+        top: 0;
+        left:100px;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+     box.onclick = function() {
+         timer = setTimeout(() => {
+            box.style.left = box.offsetLeft + 5 +'px';
+         }, 16.7);
+     }
+    </script>
+</body>
+</html>

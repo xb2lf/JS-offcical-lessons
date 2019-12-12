@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播1</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        #mask {
+            width: 1000px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            font-size: 0;
+        }
+
+        #prev,
+        #next {
+            width: 50%;
+            height: 300px;
+            display: block;
+            float: left;
+        }
+
+        #prev::after {
+            content: "";
+            width: 28px;
+            height: 45px;
+            background: url('./img/pre.png') 0 0 no-repeat;
+            position: absolute;
+            left: 0;
+            top: 128px;
+            opacity: 0;
+            transition: 1s;
+            cursor: pointer;
+        }
+
+        #next::after {
+            content: "";
+            width: 28px;
+            height: 45px;
+            background: url('./img/pre.png') -50px 0 no-repeat;
+            position: absolute;
+            right: 0;
+            top: 128px;
+            opacity: 0;
+            transition: 1s;
+            cursor: pointer;
+        }
+
+        #prev:hover::after,
+        #next:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <!-- 切换按钮 -->
+        <div id="mask">
+            <div id="prev"></div>
+            <div id="next"></div>
+        </div>
+        <!-- 轮播图 -->
+        <div id="swiper">
+            <!-- 需要操作的部分 -->
+            <!-- <div><img src="./img/banner1.jpg" alt=""></div>
+            <div><img src="./img/banner2.jpg" alt=""></div>
+            <div><img src="./img/banner3.jpg" alt=""></div>
+            <div><img src="./img/banner4.jpg" alt=""></div> -->
+        </div>
+        <ul id="focus1">
+            <!-- 需要操作的部分 -->
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script src="./js/tween.js"></script>
+    <script>
+        /* 
+        说明： 实际轮播图为三张，为了呈现视觉效果，实际放了六张，次序为1、2、3、1、2、3
+         */
+        fetch('./json/banner.json').then(d => d.json()).then(d => {
+            let temp = '';
+            temp = d.map(item => `<div><img src="${item.img}" alt=""></div>`).join('');
+            temp += temp;
+            const len = d.length;
+            swiper.innerHTML = temp;
+            const outerW = outer.offsetWidth;
+            const focus1 = document.getElementById('focus1');
+            let lis = focus1.querySelectorAll('li');
+            let num = 0;
+            function change() {
+            for (let i = 0; i < lis.length; i++) {
+                lis[i].className = '';
+                
+            }
+            lis[num].className = 'select';
+        }
+            // 点击下一张按钮
+            next.addEventListener('click', function () {
+                change();
+                num++;
+                num %= len;
+                move({
+                    el: swiper,
+                    attr: {
+                        left: - outerW * num,
+                    },
+                    time: 300,
+                    fx: 'linear' // 匀速运动
+                })
+            });
+
+            //点击上一张按钮
+            prev.addEventListener('click', function () {
+                num--;
+                if (num < 0) {    
+                    num = len - 1;
+                }
+                change();
+                move({
+                    el: swiper,
+                    attr: {
+                        left: - outerW * num,
+                    },
+                    time: 300,
+                    fx: 'linear' // 匀速运动
+                })
+            });
+
+        })
+    </script>
+</body>
+
+</html>
