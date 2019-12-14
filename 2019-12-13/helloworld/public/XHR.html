@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名: <input type="text" id="user"> <span id="s"></span><br>
+       注册的密码: <input type="password" id="pw">
+       <button id="btn">提交</button>
+       <script>
+           /* 
+           XHR XML Http  Request 
+
+           XML全称EXtensible Markup Language,翻译为可扩展置标语言,可扩展标记语言或可延伸 标示语言,是一种置标语言
+           */
+
+        let re = /^[a-zA-Z][\w-]{5,7}$/; // 以字母开头,以数字字母下划线，6-8位
+        user.onfocus = function() {
+            user.style.border = '1px solid black'; 
+            s.innerText = '';
+        }
+       user.onblur = function() {
+           // 发起ajax请求(打电话模式)
+
+           /*
+                1.创建一个电话
+                2.输入号码
+                3.按绿色键拨打
+                4.等待
+                5.通话
+            */
+        //    console.log(XMLHttpRequest);
+        let val = user.value.trim();
+        if(val && re.test(val)) {// 保证不为空且符合规则
+            let xhr = new XMLHttpRequest; // 创建一个电话
+           xhr.open('GET','/get?user='+this.value,true);  // 第一参数获取方式，第二个地址，第三个是否异步，默认为true  输入号码
+           xhr.send();// 拨打，发送
+           xhr.onload = function() {// 等待
+            //    console.log(xhr.responseText); // 通话   responseText 属性返回字符串形式的响应
+            //    console.log(JSON.parse(xhr.responseText));
+            let d = JSON.parse(xhr.responseText); 
+            if(d.code === 0) {
+                user.style.border = '1px solid red';
+            }else if(d.code === 1){
+                user.style.border = '1px solid green'; 
+            }
+           }
+        }else {
+            s.innerText = '请检查输入的格式';
+            user.style.border = '1px solid red'; 
+        }
+           
+
+       }
+       </script>
+</body>
+</html>

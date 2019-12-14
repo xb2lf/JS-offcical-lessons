@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    注册的用户名: <input type="text" id="user"> <span id="s"></span><br>
+       <script>
+
+           /* 
+           get:
+           
+           一. 在低版本IE下有缓存问题(/get?user=liucheng)
+           第一次和第二次请求的url是一致的那么第二次会走第一次的缓存
+
+           解决方案：
+           第一种：不用get用post
+           第二种：每一次的url不一致( xhr.open('GET','/get?user='+this.value + '&myrandom='+Date.now(),true);)
+
+           二. 输入的内容是中文的时候，在IE下会出现错误请求和返回
+           是因为IE的低版本在解析中文的时候解析会有问题
+
+           解决方案：把中文转成URI编码格式
+           decodeURI(); // URI编码转钟文
+           decodeURIComponent();// URI编码转钟文
+           encodeURI();// 中文转URI编码
+          encodeURIComponent(); // 中文转URI编码
+           
+           */
+       user.onblur = function() {
+           // 发起ajax请求(打电话模式)
+        //    console.log(XMLHttpRequest);
+        let val = user.value.trim();
+            var xhr = new XMLHttpRequest; // 创建一个电话
+           xhr.open('GET','/get?user='+encodeURI(this.value) + '&myrandom='+ Date.now(),true);  // 第一参数获取方式，第二个地址，第三个是否异步，默认为true  输入号码
+           xhr.send();// 拨打，发送
+           xhr.onload = function() {// 等待
+               console.log(xhr.responseText); // 通话   responseText 属性返回字符串形式的响应
+               console.log(JSON.parse(xhr.responseText));
+       }
+    }
+       </script>
+</body>
+</html>

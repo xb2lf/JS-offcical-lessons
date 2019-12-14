@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    注册的用户名: <input type="text" id="user"> <br>
+    注册的密码: <input type="password" id="pw">
+    <button id="btn">提交</button>
+
+    <script>
+        /*
+        url + 参数
+
+        code:1 -> 没有可以注册
+        code:0 -> 用户名被占用
+*/
+        // fetch('/get?user='+user.value+'&pw='+pw.value).then(d=>d.json()).then(d=>{
+        //     console.log(d);
+        // })
+
+        //当用户名失焦的时候请求服务器，问问服务器到底当前的用户名能不能注册？
+        //    fetch('/get?user=' + user.value + '$pw=' + pw.value).then(d=> d.json()).then(d=> {
+        //        console.log(d);
+        //    }) 
+
+        user.onblur = function () {
+            fetch('/get?user=' + user.value).then(d => d.json()).then(d => {
+                console.log(d);
+            })
+
+        }
+    </script>
+</body>
+
+</html>
