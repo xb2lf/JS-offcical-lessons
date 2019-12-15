@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <button id="btn">eval注入跳转</button>
+    <script>
+        /* eval的问题，如果在输入框输入带有href、src、style、loccation等操作类的属性，会注入病毒，改变页面(如输入：window.location="www.baidu.com" 会自动跳到百度页面)   */
+
+       // 直接把txt的value拿来使用会有问题
+    //    btn.onclick = function() {
+    //        let val = txt.value;
+    //        console.log(eval(`(${txt.value})`));
+    //    }
+
+
+    //  上边问题解决方案
+
+    btn.onclick = function() {
+           let val = txt.value;
+           if(/href|src|style|location/.test(val)){
+            alert('早知道你想搞事情')
+        }else{
+            console.log(eval(`(${txt.value})`));
+        }
+       }
+    </script>
+</body>
+</html>

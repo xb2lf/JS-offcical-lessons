@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: '孙悟空',
+            age: 300,
+            sex: 'man',
+            skill: 'bang',
+            fire: 10000
+        }
+
+        let orr = '' + new URLSearchParams(obj);
+        let ora = new URLSearchParams(obj).toString();
+
+        console.log(orr, ora);// 'name=%E5%AD%99%E6%82%9F%E7%A9%BA&age=300&sex=man&skill=bang&fire=10000'  'name=%E5%AD%99%E6%82%9F%E7%A9%BA&age=300&sex=man&skill=bang&fire=10000'
+    </script>
+</body>
+
+</html>

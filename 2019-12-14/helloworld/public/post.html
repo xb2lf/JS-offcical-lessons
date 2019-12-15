@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+        <script>
+        user.onblur = function() {
+            fetch('/post',{
+                method:'post',
+                body:''+new URLSearchParams({
+                    user:this.value
+                }),
+                headers:{
+                    'content-type':'application/x-www-form-urlencoded'
+                }
+            }).then(d=>d.json()).then(d=> {
+                console.log(d); //// {code: 1, msg: "木有介个银!"}
+            })
+        }
+        </script>
+</body>
+</html>

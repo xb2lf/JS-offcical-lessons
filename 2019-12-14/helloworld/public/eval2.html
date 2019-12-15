@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+     *  需求：将三个字符串：'1'  '+' '2'  变成正常数学运算，结果得数字3
+     */
+     let val = '1';
+     let val1 = '+';
+     let val2 = '2';
+
+     console.log(eval(val + val1 + val2));//尽量把能够转成js运行的代码尽量转了  3
+     console.log( new Function('a,b','return a+b')(1,2) );// 3
+     console.log(new Function('','return '+ '{name:"黄君成"}')());// {name: "黄君成"}
+    </script>
+</body>
+</html>
