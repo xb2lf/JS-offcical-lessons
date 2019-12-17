@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <button>1111</button>
+        <button>2222</button>
+        <button>3333</button>
+        <p id="p">第一张图片</p>
+
+        <input type="button" value="后退" id="btn"/>
+<script>
+    let ary = ['第一张图片','第二张图片','第三张图片'];
+    const btns = document.querySelectorAll('button');
+
+    btns.forEach((ele,i)=>{
+        ele.onclick = function(){
+            p.innerHTML = ary[i];
+            window.history.pushState({
+                    num:i
+                },'','http://localhost/history1.html/'+i);
+                }
+    });
+
+    btn.onclick = function(){
+        window.history.go(-1);
+    }
+
+    //当操作历史记录的时候去触发这个事件
+    window.onpopstate = function(ev){
+        // console.log(ev.state.num);
+        //触发这个事件的时候，通过ev.state去拿之前存的数据
+        p.innerHTML = ary[ev.state.num];
+    }   
+
+</script>
+</body>
+</html>
