@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名：<input type="text" id="user"><span id="s"></span><br>
+    注册的密码：<input type="password" name="" id="pw">
+    <button id="btn">提交</button>
+    <script>
+     user.onblur = function() {
+         var xhr = new XMLHttpRequest;
+         //能多见听一次，但是从真是开发上来说毫无意义，因为使用ajax的目的只有拿到相应body
+         xhr.onreadystatechange = function() {
+             console.log(xhr.readyState);
+         }
+         xhr.open('get','/get?user' + this.value);
+         xhr.send();
+     }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #bar {
+            width: 0%;
+            height: 3px;
+            background: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bar"></div>
+    <h3>文件上传：</h3>
+    选择一个文件上传: <br />
+    <input id="file" type="file" name="image" size="50" />
+    <br />
+    <button id="btn">上传</button>
+    <script>
+    btn.onclick = function() {
+        let xhr = new XMLHttpRequest;
+        // console.log(xhr);
+        xhr.open('post','/upload');
+        /* 
+        //file.files[0] 真正要的数据
+        console.dir(file);
+        console.dir(file.files[0]);
+
+        // console.dir(xhr);
+        //ev.total  文件的总体积
+        //ev.loaded 当前文件上传的体积
+        //  ev.loaded / ev.total  = 0-1
+         */
+        xhr.upload.onprogress = function(ev) {// upload.onprogress  上传进度
+        // console.log(ev);
+        bar.style.width = (ev.loaded / ev.total) * 100 + '%';
+
+        }
+        let f = new FormData();
+        f.append('image',file.files[0]);
+        xhr.send(f);
+        // xhr.send('image='+file.files[0]);//file.value是字符串
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+    }
+    </script>
+</body>
+
+</html>

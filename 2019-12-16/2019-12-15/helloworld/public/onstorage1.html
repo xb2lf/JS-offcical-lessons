@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        onstorage事件
+    */    
+
+//    localStorage.setItem('user','lc');
+
+    document.onclick = function(){
+        localStorage.setItem('user','laotian');
+    }
+
+    window.onstorage = function(){
+        console.log('触发2')
+    }
+    /* 通过实例验证，onstorage1页面会触发onstorage2页面的onstorage的事件，但自身并未触发，而二者同事有onstorage事件 */
+</script>
+</body>
+</html>
