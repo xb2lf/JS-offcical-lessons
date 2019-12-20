@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>联想搜索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #search {
+            display: block;
+            width: 200px;
+            height: 25px;
+            margin: 10px auto 0;
+        }
+
+        ul {
+            width: 200px;
+            margin: 0 auto;
+            list-style: none;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+
+        li {
+            height: 25px;
+            line-height: 25px;
+            border-bottom: 1px solid #ccc;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        li:hover {
+            border: 2px solid #90BAFE;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <h2>蕃薯搜索</h2>
+        <input type="text" id="search" autocomplete="off" autofocus>
+        <ul id="ul"></ul>
+        <script>
+       /*
+       https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd=s&cb=fn2
+
+       data:{q: "as", p: false, g: Array(10), slid: "8000151853817518762"}
+       */
+      function fn(data) {
+          const {g,q} =data;
+          let html = '';
+        //   console.log(data);
+        if(!g) {
+            ul.innerHTML = '';
+            return;
+        };
+        g.forEach(({q}) => {
+            html += '<li>' + q +'</li>';
+        });
+        ul.innerHTML = html;
+        ul.onclick = function(ev){
+            if(ev.target.tagName === 'LI'){
+                // window.location.href = 'https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText;
+                window.open('https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText,'_blank');
+            }
+        }
+      }
+      search.onkeyup = function() {
+          let script = document.createElement('script');
+          script.src = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd='+ this.value + '&cb=fn';
+          document.getElementsByTagName('head')[0].appendChild(script);
+          script.remove();
+      }
+        </script>
+    </div>
+</body>
+
+</html>

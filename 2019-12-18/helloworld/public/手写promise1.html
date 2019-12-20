@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        promise需要注意的几点：
+        1.解决异步编程问题
+        2.成功时所执行和失败时所执行
+        3.从pending到成功或者失败状态后会凝固，不可逆
+        4.then实现(多次)
+        5.关于穿透的问题      
+         */
+    function MyPromise(executor) {
+        let that = this;
+        that.value = undefined; //成功的默认值
+        that.reason = undefined;// 失败的默认值
+        that.status = 'pending';// 默认是等待状态
+        // 成功和失败的事件池，存储绑定的函数(订阅)
+        that.fulfilledCallback = [];
+        that.rejectedCallback = [];
+        
+        //成功的函数
+        function fulfilled(value) {// 发布成功事件池
+        //在调用成功函数时只允许从pending到成功状态
+        if(that.status = 'pending') {
+            that.status = 'fufilled';
+            that.value = value; // 当调用成功函数时，把外界传入的参数赋值给this.value
+
+            that.fulfilledCallback.forEach(fn => {
+                 fn();
+            });
+        }
+
+        }
+
+        // 失败的函数
+        function rejected(reason) {// 发布成功事件池
+        //在调用成功函数时只允许从pending到成功状态
+        if(that.status = 'pending') {
+            that.status = 'rejected';
+            that.value = value; // 当调用成功函数时，把外界传入的参数赋值给this.value
+
+            that.rejectedCallback.forEach(fn => {
+                 fn();
+            });
+        }
+
+        }
+       
+        try {
+            executor(fulfilled,rejected);
+        } catch (error) {
+            rejected(error);
+        }
+       
+       // 只要调用MyPromise,就执行executor,所以在executor中有同步和异步代码
+    }
+
+    MyPromise.prototype.then = function(res,rej) {// 将then挂到原型上，以便使用then
+        let that = this;
+
+         //为了保证then一直then，then必须返回一个promise对象
+       let promise2 = new MyPromise(function(resolve2,reject2) {
+                   //成功时调用res
+        if(that.status === 'fufilled') {
+             // let x = res(that.value); //第一个返回值就是第二次then的参数
+           try{
+            let x = res(that.value);
+            resolve2(x);
+           }catch (error) {
+               resolve2(that.value);
+           }
+        }
+        //失败时调用
+        if(that.status === 'rejected') {
+            try {
+                let x = rej(that.reason);
+                reject2(x);
+            }catch(error) {
+                reject2(that.reason);
+            }
+        }
+        //异步的情况，把成功和失败的函数订阅到对应的池子里去
+        if(that.status ===  'pending') {
+            that.fulfilledCallback.push(function(){
+                try{
+                    let x = res(that.value);
+                    resolve2(x);
+                } catch (error) {
+                    if(typeof res === 'function'){
+                            reject2(that.reason);
+                        }else{
+                            resolve2(that.value);
+                        }
+                }
+            });
+            that.rejectedCallback.push(function(){
+                try {
+                        let x = rej(that.reason);
+                        reject2(x);
+                    } catch (error) {
+                        rejected2(that.reason);
+                    }
+            });
+        }
+       });
+       return promise2;
+        
+    }
+
+    // new一个实例进行验证
+    new MyPromise(function(resolve,reject) {
+        setTimeout(() => {
+            resolve(10); //走成功时验证
+        }, 1000);
+    }).then((d)=>{
+        throw new Error('就是错了');
+    },(e)=>{
+        console.log(e);
+    })
+    .then(function(d2){
+        console.log(d2)
+    },function(err) {
+        console.log('错误')
+    });
+
+
+    // new Promise(function(res,rej){
+    //     // throw new Error('就是错了');
+    //     res(10);
+    // }).then((d)=>{
+    //     //console.log(d)
+    //     throw new Error('就是错了');
+    // },(d)=>{
+    //     console.log(d);
+    // }).catch(e=>{
+    //     console.log(e);
+    // })
+
+    // .then(d=>{
+    //     console.log(d);
+    // })
+    </script>
+</body>
+
+</html>

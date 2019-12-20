@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      function fn1(a){
+        console.log(a);
+    }
+
+    //点击是异步的
+    document.onclick = function(){
+        let o = document.createElement('script');
+        o.src = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd=s&cb=fn1';
+        head.append(o);//插入到页面的时候，fn早就被解析完了
+
+        //*****上面这句话就等同于函数调用，等于下面这句话
+        // fn(5);
+    }
+
+    /*
+        https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd=s
+    */    
+    </script>
+</body>
+</html>
