@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function* fn(){
+        console.log(1); // 1   第一次输出
+        yield 'hello';
+        console.log(2); // 2 第三次输出
+        return 5;
+    }    
+    let f = fn();
+    console.log(f.next()); // {value: "hello", done: false}   第二次输出
+    console.log(f.next()); // {value: 5, done: true}   第四次输出
+    console.log(f.next()); // {value: undefined, done: true}  第五次输出   
+    </script>
+</body>
+</html>

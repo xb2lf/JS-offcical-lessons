@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function* fn(){ //同步编程函数，这个函数就算有异步也算同步
+        console.log(1);
+        let a = yield; //'异步的数据已经到手';
+        console.log(a);
+        console.log(2);
+    }
+
+
+    let f = fn();
+    f.next();
+    setTimeout(() => {
+        f.next('异步的数据已经到手');
+    },1000);
+
+    /* 
+    上边代码输出顺序为：1   '异步的数据已经到手'    2
+    
+    */
+    </script>
+</body>
+</html>

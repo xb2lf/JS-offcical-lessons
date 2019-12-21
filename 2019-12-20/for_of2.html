@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body id="body">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        Object.prototype[Symbol.iterator] = function () {
+            let ary = Object.keys(this); // ['name','age','sex']
+            let len = ary.length; // 获取到keys的长度，即循环的次数
+            let index = 0;// 从0开始循环
+            let that = this;
+            return {
+                next() {
+                    if (index < len) {// 只要index小于对象的keys的length就继续循环
+                        return {
+                            //把对象的key和val通过value传到外面
+                            value: {
+                                key: ary[index],
+                                val: that[ary[index++]]
+                            },
+                            done: false  // 只要没有循环完就为false
+                        }
+                    } else {
+                        // 循环完之后就把done的值设为true
+
+                        return {
+                            value: undefined,
+                            done: true
+                        }
+                    }
+                }
+            }
+        }
+
+        let obj2 = {
+            name2: '哈哈'
+        }
+
+        for (let { key, val } of obj2) {
+            console.log(key, val); // name2 哈哈
+        }
+    </script>
+</body>
+
+</html>

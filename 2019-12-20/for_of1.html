@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body id="body">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+
+        /* 
+            对象没有遍历接口，但是可以添加一个遍历接口
+       console.dir(obj);//for in 如果要让对象有遍历接口还不如用for in
+   
+   
+        Symbol.iterator
+    
+           Iterator 的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是 ES6 创造了一种新的遍历命令for...of循环，Iterator 接口主要供for...of消费。
+     
+           
+        */
+        let obj = {
+            name: '小明',
+            age: 18,
+            sex: '妹纸'
+        };
+        obj[Symbol.iterator] = function() {
+            let ary = Object.keys(obj); // ['name','age','sex']
+            let len = ary.length; // 获取到keys的长度，即循环的次数
+            let index = 0 ;// 从0开始循环
+            return {
+                next () {
+                    if(index < len) {// 只要index小于对象的keys的length就继续循环
+                       return {
+                           //把对象的key和val通过value传到外面
+                          value: {
+                              key:ary[index],
+                              val:obj[ary[index++]]
+                          },
+                          done:false  // 只要没有循环完就为false
+                       }
+                    }else {
+                        // 循环完之后就把done的值设为true
+
+                        return {
+                            value:undefined,
+                            done:true
+                        }
+                    }
+                }
+            }
+        }
+
+        for(let {key,val} of obj) {
+            console.log(key,val);// name 小明    age 18  sex 妹纸
+        }
+    </script>
+</body>
+
+</html>
