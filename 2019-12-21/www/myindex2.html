@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    user=123&pass=321  ^([^=]+)=([^&]+)&?
+    */
+    let str = 'user=彭_love_锦程&pass=321&wd=高兴&pass=321&pass=32pp';
+    str.replace(/([^=]+)=([^&]+)&?/g,($0,$1,$2)=>{
+        obj[$1] = $2;
+    });
+    console.log(obj);// {user: "彭_love_锦程", pass: "32pp", wd: "高兴"} 
+    </script>
+</body>
+</html>

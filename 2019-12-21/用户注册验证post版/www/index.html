@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="box"></div> -->
+    用户名:<input type="text" id="us" />
+    密码:<input type="password" id="pw" />
+    <button id="btn">注册</button>
+    <script>
+        //post
+
+        us.onblur = async = function () {
+            let data = await fetch('post',{
+                body:'user=' + this.value,
+                headers: {
+                    'conten-type':'application/x-www-form-urlencoded'
+                },
+                method:'post'
+            }).then(d => d.json());
+            // console.log(data);
+            if (data.code === 0) {
+                this.style.border = '1px solid green';
+            } else if (data.code === 1) {
+                this.style.border = '1px solid red';
+            }
+        }
+
+        btn.onlick = function () {
+            fetch('/register?user=' + us.value + '&password=' + pw.value).then(d => d.json()).then(d => {
+                // console.log(d);
+                if (d.code === 0) {
+                    alert('注册失败');
+                } else if (d.code === 1) {
+                    alert('注册成功');
+                } else if (d.code === 2) {
+                    alert(d.msg);
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
