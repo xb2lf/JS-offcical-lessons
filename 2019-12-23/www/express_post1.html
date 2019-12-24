@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>hahahahahhahahahahah</p>
+    <script>
+    fetch('./register',{
+        body:'name=xiaoxiao',
+        method:'post',
+        headers:{
+            'content-type':'application/x-www-form-urlencoded'
+        }
+    }).then(d => d.josn()).then(d=> {
+        console.log(d);
+    })
+    </script>
+</body>
+</html>
