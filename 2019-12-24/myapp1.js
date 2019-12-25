@@ -119,7 +119,7 @@ app.get('/islogin',(req,res)=>{
     // console.log(req.session.userinfo);
 });
 
-// 退出登录接口
+
 app.get('/logout',(req,res)=>{
     req.session.destroy(function(err){// 销毁session值
         console.log(err);
@@ -128,6 +128,33 @@ app.get('/logout',(req,res)=>{
         code:0
     });
 })
+
+//多并发
+app.get('/a',(req,res)=>{
+    setTimeout(() => {
+        res.json({user:'pjc'})
+    }, 2000);
+})
+
+app.get('/b',(req,res)=>{
+    setTimeout(() => {
+        res.json({iphone:'123456'})
+    }, 5000);
+});
+
+app.get('/c',(req,res)=>{
+    let {user,iphone} = req.query
+    if(user=='pjc'&& iphone=='123456'){
+        res.json({
+            code:0
+        })
+    }else{
+        res.json({
+            code:1
+        })
+    }
+    
+});
 
 let port = 80;
 app.listen(port);

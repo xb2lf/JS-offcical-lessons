@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./axios.js"></script>
+    <script>
+    let timer = null,num=0;
+    const intance = axios.create();
+
+    let mm = intance.interceptors.request.use((config)=>{
+    console.log('被拦截');
+    return config;
+   })
+
+document.onclick = function(){
+    axios.get('/a').then(({user})=>{
+        console.log(user);
+    });
+    intance.get('/b').then((d)=>{
+        console.log(d);
+        //当b数据回来的时候，取消局部拦截
+        intance.interceptors.request.eject(mm);
+    });
+}  
+    </script>
+</body>
+</html>

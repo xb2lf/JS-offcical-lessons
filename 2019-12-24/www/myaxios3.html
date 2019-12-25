@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./axios.js"></script>
+    <script>
+        //axios自带拦截器  全局拦截
+
+        let timer = null, num = 0;
+
+        //请求拦截
+        axios.interceptors.request.use(async function (config) {
+            // Do something before request is sent
+            console.log('被拦截', config);
+            // timer = setInterval(() => {
+            //     console.log(num++);
+            // }, 1000);
+
+            let u = localStorage.getItem('seeion_id');
+            //判断下用户是否登录过，如果没有就直接跳到登陆页
+            if(u) {
+                // 如果用户登录过，可能有效期已过，那么就要请求是否登录的接口去验证
+                let data = await fetch('/islogin').then(d=> d.json());
+                if(data.code == 0) {
+                    return config;
+                }else {
+                    window.location.href = '/';
+                }
+            }
+        }, error => {
+            // Do something with request error
+            return Promise.reject(error);
+        });
+
+        //响应拦截
+        axios.interceptors.response.use(function(config) {
+        // Do something before response is sent
+            //  clearInterval(timer);
+            config.user = config.data.user;
+            console.log(config)
+        return config;
+        },error => {
+        // Do something with response error
+        return Promise.reject(error);
+        });
+    </script>
+</body>
+
+</html>
