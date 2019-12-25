@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>INDEX</h1>
+	<p id="p"></p>
+	<button id="btn">退出登录</button>
+	<script src="axios.js"></script>
+<script>
+ //axios方式
+  axios.get('/islogin').then(data => {
+      let d = data.data;
+      console.log(d);
+      if(d.code == 0) {
+          p.innerHTML = '欢迎' + d.user +'回来';
+      }else{
+          window.location.href = '/';
+      }
+  })
+
+  //fetch方式
+  	// fetch('/islogin').then(d=>d.json()).then(d=>{
+	// 	if(d.code == 0){
+	// 		p.innerHTML = '欢迎'+d.user+'回来';
+	// 	}else{
+	// 		window.location.href = '/';
+	// 	}
+    // });
+    
+    btn.onclick = function() {
+        fetch('/logout').then(d =>d.json()).then(d => {
+            if(d.code == 0) {
+                window.location.href = '/';
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
