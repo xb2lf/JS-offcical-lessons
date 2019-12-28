@@ -1,0 +1,20 @@
+body {
+    background: lightpink;
+}
+
+#box{
+    width: 400px;
+    height: 100px;
+    border: 1px solid #000;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    margin: 10px auto;
+}
+p{
+    width: 200px;
+    height: 20px;
+    line-height: 20px;
+    background: darkorchid;
+    margin: 40px auto;
+}
