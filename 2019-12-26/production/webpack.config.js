@@ -9,7 +9,7 @@ const obj  = {
        index: path.resolve(__dirname,'./src/index.js')
     },
     output:{
-        path:path.resolve(__dirname,'./obj/js/'),
+        path:path.resolve(__dirname,'obj'),
         filename:'index.js',
     },
     module:{
@@ -18,14 +18,14 @@ const obj  = {
                 test:/\.css$/,
                 use: [{
                     loader: miniCssPlugin.loader
-                },'style-loader', 'css-loader'],
+                }, 'css-loader'],// 'style-loader',
                 //包含
                 include:[
                    path.resolve(__dirname,'./src/css/') 
                 ],
                 //排除node_modules
                 exclude: [
-                    path.resolve(__dirname, "./node_modules")
+                    path.resolve(__dirname,'./node_modules')
                 ],
                 // use:[
                 //     'style-loader'
@@ -38,11 +38,15 @@ const obj  = {
                 use: [
                   {
                     loader: 'file-loader',
+                    
                     options: {
-                        outputPath: path.resolve(__dirname,'./obj/images')
+                        outputPath: 'images/'
                     }
                   }
-                ]
+                ],
+                include:[
+                    path.resolve(__dirname,'./src/images') 
+                 ],
             }
         ]
     },
@@ -56,8 +60,8 @@ const obj  = {
     },
     plugins:[
         new HtmlWebpackPlugin({
-            template:path.resolve(__dirname,'./src/index.html'),
-            filename:path.resolve(__dirname,'./obj/index.html'),
+            template:path.resolve('./src/index.html'),
+            filename:path.resolve(__dirname,'obj/index.html' ),
             title:'旋风小子',
             minify:{
                 removeComments: true,//去除html中的注释
@@ -67,7 +71,7 @@ const obj  = {
             }
         }),
         new miniCssPlugin({
-            filename:'./obj/css/[name].css'
+            filename:'css/[name].css'
         }),
     ],
     optimization: {
