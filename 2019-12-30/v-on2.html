@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: salmon;
+        }
+
+        #box2 {
+            width: 50px;
+            height: 50px;
+            background: gold;
+        }
+    </style>
+</head>
+
+<body>
+  <div id="app">
+    <input 
+    type="text" 
+    v-model="val"
+    @keyup.12 ="add">
+    <button @click="add">发送</button>
+    <ul>
+        <li v-for="(val) in ary">{{val}}</li>
+    </ul>
+    <div id="box" @click="click1">
+        <div id="box2" @click.stop="click2"></div>
+        <!-- .stop阻止冒泡 -->
+    </div>
+
+    <input type="text" @mousedown.prevent>
+    <!-- .prevent阻止系统默认行为 -->
+    <button @click.once="once">点一次就完</button>
+    <!-- .onck 事件只触发一次 -->
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+  new Vue({
+      el:"#app",
+      data:{
+          ary:[1111,2222,3333],
+          val:''
+      },
+      methods: {
+          once() {
+              alert(22);
+          },
+          click1() {
+              alert(1);
+          },
+          click2(ev) {
+              alert(2);
+              // console.log(ev)
+              // ev.cancelBubble = true;
+              // ev.stopPropagation();
+          },
+          add() {
+            //   console.log(this.val);
+            this.ary.push(this.val);
+          },
+
+      },
+  })
+  </script>
+</body>
+
+</html>

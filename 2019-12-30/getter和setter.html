@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     let obj = {name:'小李'};
+
+     Object.defineProperty(obj,'age',{
+         value:2,
+         writable:false, // 属性是否可被修改，默认ture
+         enumerable:false,// 属性是否可被枚举，默认ture
+         configurable:false, // 是否可以被删除，默认ture
+     })
+
+     console.log(obj.age); // 2
+
+     obj.age = 12;
+     console.log(obj.age);//未被修改 输出为2，
+
+     for (const attr in obj) {
+         console.log(attr); // 未枚举到属性age，输出为name
+     }
+
+    console.log(delete obj.name); // ture
+    console.log(delete obj.age); // false
+    console.log(obj);  //age未被删除，输出为{age: 2}
+    </script>
+</body>
+</html>

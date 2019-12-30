@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model:lazy="fullName">
+        <p>{{fullName}}</p>
+        <p>{{firstName}}</p>
+        <p>{{lastName}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+           el:"#app",
+           data:{
+               firstName:'晓光',
+               lastName:'南',
+           },
+           computed:{
+              fullName:{
+                 //可以为一个对象，里面可以设置get，set
+                 get() {
+                     return this.firstName + ' ' + this.lastName;
+                 },
+                 set(val) {
+                     let ary = val.split(' ');
+                     this.firstName = ary[0];
+                     this.lastName = ary[ary.length - 1];
+                 } 
+              }
+           }
+        })
+    </script>
+</body>
+</html>

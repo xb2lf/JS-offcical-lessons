@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="app">
+      <p :style="{fontSize: size + 'px'}">字体有多大</p>
+      <!-- :style="{fontSize: size +'px'}是v-bind:style="{fontSize: size +'px'}"的缩写 -->
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+   new Vue({
+       el:".app",
+       data:{
+          size: 30
+       }
+   })
+  </script>
+</body>
+
+</html>

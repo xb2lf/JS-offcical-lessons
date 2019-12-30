@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" @input='(change(1,$event))'>
+        <button @click='add'>发送</button>
+        <ul>
+           <li 
+           v-for="val in ary"
+           >{{val}}</li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+       new Vue({
+           el:'#app',
+           data:{
+              ary:[1111,2222,3333],
+              val: '',
+           },
+           methods:{
+             add() {
+                 this.ary.push(this.val);
+             },
+             change(num,ev) {
+                //如果不传参，第一个参数就是事件对象
+                //*** 如果传了参还想拿到事件对象，需要在模板中的事件函数内传一个$event
+                 this.val = ev.target.value;
+             }
+           }
+       })
+    </script>
+</body>
+</html>

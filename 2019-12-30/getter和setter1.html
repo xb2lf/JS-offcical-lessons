@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     let obj = {name:'小李'};
+     let num = 2;
+     obj.age = 2;
+     Object.defineProperty(obj,'age',{
+         enumerable:false,// 属性是否可被枚举，默认ture
+         configurable:false, // 是否可以被删除，默认ture
+         get() {//当读取这个属性的时候触发
+            console.log('在读取时已触发'); // 在读取时已触发(触发两次)  
+            //return后的内容就是读操作后的结果（必须写return）
+
+            return  num
+         },
+         set(val) {
+             //当写操作（这个属性）的是时候触发(可以没有return的)
+             console.log('在写入时已触发'); // 在写入时已触发
+             console.log(val); // 12
+             num = val; // 
+         }
+     })
+
+     console.log(obj.age); // 2  读取
+
+     obj.age = 12; // 写入
+     console.log(obj.age);// 12  读取
+    </script>
+</body>
+</html>

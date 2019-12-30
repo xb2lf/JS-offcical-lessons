@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="app">
+    <p :class="color">321321</p>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+      /*
+        如果说属性需要**动态操作**，那么就使用v-bind:xx
+        缩写:   :
+
+        :style="{属性名:属性值（可以为数据）}"
+        :style="[{属性名1:属性值1（可以为数据）},{属性名2:属性值2（可以为数据）}]"
+        :class="{类名:布尔值}"
+        v-bind="{data:1}"  没有具体的属性可以使用v-bind=对象（批量设置属性）
+    */
+   let vm = new Vue({
+       el:".app",
+       data:{
+          color:{
+              red:true,
+          }
+       }
+   });
+
+   setTimeout(() => {
+       vm.color.red = false;
+       vm.color.green = true; 
+   }, 3000);
+  </script>
+</body>
+
+</html>

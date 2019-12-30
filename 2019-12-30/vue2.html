@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            border:1px solid #000;
+            background: skyblue;
+        }
+        .box2{
+            width:100px;
+            height:100px;
+            border:1px solid red;
+            background: darkorange;
+        }
+        </style>
+</head>
+<body>
+    <div class="app">
+        <div v-if="b" class="box"></div>
+        <div class="box2" v-else></div>  
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    let vm = new Vue({
+        el:".app",
+        data:{
+            b:true,
+        },
+    })
+
+    setTimeout(() => {
+        vm.b = false;
+    }, 3000);
+    </script>
+</body>
+</html>
