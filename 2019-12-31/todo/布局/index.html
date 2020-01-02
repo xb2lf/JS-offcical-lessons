@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容"
+                    v-model="val"
+                    @keyup.13="add($event)"
+                >
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox" @click="toggleAll"  id="toggleAll" v-model="checkedAll">
+                <ul class="todo-list"  v-show="ary.length">
+                    <li :class="{completed:val.checked===true,editing:val.onoff===true}" v-cloak v-for="(val,key) in getAry" >
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model="val.checked" :value= 'select'>
+                            <label @dblclick="dbclick(val,key)">{{val.txt}}</label>
+                            <button class="destroy"  @click="rm(key)"></button>
+                        </div>
+                        <input 
+                            class="edit"
+                            v-model="changetxt"
+                            ref="input"
+                            @blur="blur(val,$event)"
+                            @keyup.13="blur(val,$event)"
+                            @keyup.27="esc(val)"
+                        />
+                        <!-- @keyup.esc="esc(val)" -->
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{count}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul 
+                    class="filters"
+                >
+                    <li>
+                        <a 
+                            href="#/all"
+                            :class="fl===1 ? 'selected' : ''"
+                            @click = 'filter(1)'
+                            
+                        >全部</a>
+                        <!-- class="selected" -->
+                    </li>
+                    <li>
+                        <a 
+                            href="#/unchecked" 
+                            :class="fl===2 ? 'selected' : ''"
+                            @click = 'filter(2)'
+                        >未选中</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/checked"
+                            :class="fl===3 ? 'selected' : ''"
+                            @click = 'filter(3)'
+                        >已选中</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+<script src="../vue.js"></script>
+<script>
+    //editing ：双击切换li显示的class名
+    //completed ：删除线的class名
+ 
+    new Vue({
+        el:'.todoapp',
+        data:{ 
+            val:'',
+            changetxt:'', 
+            istrue:false, // 解决失焦与esc冲突问题
+            fl:1,
+            checkedAll:false, // 动态关联全选按钮
+            num:0,
+            ary:[],
+        },
+        methods:{
+            //添加
+            add(ev) {
+               if(!this.val)return;
+               this.ary.unshift({
+                    id:Date.now(),
+                    txt:this.val, // ev.target.value
+                    checked:false,
+                    onoff:false
+                });
+                this.val = '';
+            },
+            // 删除
+            rm(key) {
+             this.ary = this.ary.filter((e,index)=>index!==key);
+            },
+            //双击输入框修改内容
+            dbclick(val,key) {
+                val.onoff = true;
+                this.changetxt = val.txt;
+                this.$nextTick((x) => { 
+                    // console.dir(this.$refs.input[key])
+                    this.$refs.input[key].select(); // this.$refs.input[index].focus();
+                })
+                
+            },
+            // 失焦保存修改内容
+            blur(val,ev) {
+               if(this.istrue) return;
+               val.txt = this.changetxt;
+               val.onoff = false;
+            },
+            //esc恢复原先内容
+            esc(val) {
+               this.istrue = true;
+               setTimeout(()=>{
+                    this.isblur = false
+                },100)
+                val.onoff = false;
+            },
+            // 点击上边全选按钮
+            toggleAll() {
+                if(toggleAll.checked) {
+                    this.ary.forEach((ele,i) => {
+                        ele.checked = true;
+                    });
+                }else{
+                    this.ary.forEach((ele,i) => {
+                        ele.checked = false;
+                    });
+                }
+            },
+            // 过滤数据
+            filter(fl) {
+                this.fl = fl;
+            }
+            
+        },  
+        computed:{
+            // reload(){ // 如果本地写入localStorage，则刷新页面后，部分数据需要清空，部分数据需要保留
+            //      window.reload = () => {
+            //          this.ary.forEach((item,i) => {
+            //              item.checked = false;
+            //          });
+            //          this.num = 0;
+            //      }
+            // },
+            // 关联全选
+            select() {
+                this.checkedAll =  this.ary.every((item,i) => {
+                 return item.checked === true;
+              });
+
+          },
+          // 获取需要渲染页面的数据结构
+          getAry() {
+                const {fl,ary} = this;
+                return ary.filter(item => {
+                    switch (fl) {
+                        case  1:
+                            return item;
+                            break;
+                        case 2:
+                            return !item.checked;
+                            break;
+                        case 3:
+                            return item.checked;
+                        default:
+                            return item;
+                            break;
+                    }
+                })
+            },
+            // 统计未选中的元素的个数
+            count() {
+                let arr = this.ary.filter(item => {
+                    return !item.checked;
+                });
+               return this.num = arr.length ? arr.length : 0;
+            }
+        },
+        watch:{
+            // 检测ary的变化，并在本地写入localStorage
+            ary:{
+                handler(val,oldVal){
+                    localStorage.setItem('data',JSON.stringify(val))
+                    // console.log('新'+JSON.stringify(val))
+                    // console.info('旧'+JSON.stringify(oldVal))
+                },
+                //深度监听
+                deep:true
+            }
+        }
+        
+            
+    });
+    //  获取本地写入的localStorage，并重新换成json格式返回输出
+    // function getIem(){
+    //     let v = localStorage.getItem('data');
+    //     if(!v) {
+    //         return v && JSON.parse(v) || []
+    //     }else {
+    //         return v && JSON.parse(v) || [{
+    //                 id:Date.now(),
+    //                 txt:this.val, // ev.target.value
+    //                 checked:false,
+    //                 onoff:false
+    //             },]
+    //     }
+    // }
+</script>
+</body>
+</html>

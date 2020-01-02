@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    .active{
+        font-size: 30px;
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <div id="app">
+        <div 
+            v-bind="{'class':sty,id:'box'}"
+            @click="fn(key)"
+            v-for="(val,key) in ary"
+        >我是加载的元素</div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            sty:'active',
+            num:1,
+            ary:[1,2,3,4,5]
+        },
+        methods: {
+            fn(key){
+                console.dir(box);
+            },
+            // fn:()=>{
+
+            // }
+        },
+    });
+
+
+</script>
+</body>
+</html>

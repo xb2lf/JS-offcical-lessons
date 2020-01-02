@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div  id="app">
+        <input type="text" v-model="txt" @keyup.add.13="add">
+        <ul>
+            <li
+            v-for="(val) in ary"
+            >
+            <input type="checkbox" v-model="val.checked">
+            <span>{{val.val}}</span>
+            </li
+                >
+        </ul>
+        <p>{{ary}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+      el:"#app",
+      data:{
+          txt:'',
+          ary:getIem(),
+      },
+      methods: {
+          add() {
+              this.ary.unshift({
+                  id:Date.now(),
+                  val:this.txt,
+                  checked:false,
+              });
+              this.txt = '';
+          },
+      },
+       //watch监听的都是data中的数据
+        //watch默认只能监听一层数据，如果有多层是监听不到的
+      watch: {
+           ary(){
+                console.log('触发');
+                localStorage.setItem('data',JSON.stringify(this.ary))
+            }
+      },
+    });
+
+    function getIem(){
+        let v = localStorage.getItem('data');
+        return v && JSON.parse(v) || [{
+                id:0,
+                val:'vue真的好学',
+                checked:true
+            },{
+                id:1,
+                val:'vue真的简单',
+                checked:false
+            }]
+    }
+    </script>
+</body>
+</html>

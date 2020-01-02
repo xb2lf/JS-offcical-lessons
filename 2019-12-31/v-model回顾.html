@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <div id="app">
+        <!-- @input="change" id="txt"-->
+    <!-- <input  v-model="val" type="text" /> -->
+        <!-- {{val}} -->
+        <input 
+            type="text" 
+            v-model="val"
+            @keyup.13="click"
+        />
+        <!--  @keyup.13="click"还可以写成 @keyup.enter="click" -->
+        <!-- @keyup="up" -->
+        <button
+            @click="click"
+        >点击</button>
+        <ul>
+            <li 
+                v-for="(val) in ary"
+                @click="rm($event)"
+            >{{val}}</li>
+        </ul>
+        <p>{{ary}}</p>
+   </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:'#app',
+        data:{
+            val:'',
+            ary:[]
+        },
+        methods:{
+            click(){
+                // console.log(txt.value);
+                this.ary.push(this.val);
+                this.val = '';
+            },
+            rm(ev){
+                this.ary = this.ary.filter(e=>e!==ev.target.innerText);
+            }
+             // 直接这样调用太麻烦，不如直接在输入框写入@keyup.13="click"
+            // up(ev){
+            //     if(ev.keyCode === 13){
+            //         this.ary.push(this.val);
+            //         this.val = '';
+            //     }
+            // }
+        }
+    })
+    /* 
+    这么写可以实现功能，但有一个bug，如果几个目标元素的innerText一样的话，会把同时把这几个目标元素的数据都删除，所以需要改进
+     */
+    </script>
+</body>
+</html>

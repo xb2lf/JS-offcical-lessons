@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model:number="val">
+        <p> {{ val | fnn }}</p>
+        <p>{{val}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        /* 全局注册过滤器 */
+        //注册全局的过滤器，要放在new Vue的上方
+        Vue.filter('fnn',function(val) {
+            console.log(val);
+            return val < 10 ? '0' + val : '' + val;
+        });
+    new Vue({
+        el:"#app",
+        data:{
+            val:'清华大学',
+        },
+        methods: {
+            // fn() {
+            //     return this.val.split('').reverse().join('');
+            // },
+        },
+        computed:{
+            // reverse() {
+            //     return this.val.split('').reverse().join('');
+            // }
+        },
+        filters:{
+            rever(val){
+                return val.split('').reverse().join('');
+            },
+            clearNum(val){
+                return val.replace(/\d+/,'')
+            },
+        }
+    })
+    </script>
+</body>
+</html>
