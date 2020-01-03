@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>我是父元素</h2>
+        <button @click="changeFn">父元素按钮{{num}}</button>
+        <hr /> 
+        <!-- 使用组件 -->
+        <module
+        :nn='num'
+        @child="changeFn"
+        ></module
+            >
+    </div>
+    <!-- 子组件模板 -->
+    <template id="module">
+        <div>
+            <h5>我是子元素</h5>
+            <button @click="add">子按钮{{nn}}</button>
+        </div>
+    </template>
+<script src="./vue.js"></script>
+<script>
+// 定义子组件
+const module = {
+            template:'#module',
+            props:['nn'],
+            methods:{
+                add() {
+                    this.$emit('child');// 触发当前实例上的事件。附加参数都会传给监听器回调。
+                }
+            }
+}
+new Vue({
+    el:'#app',
+    data:{
+        num:0,
+    },
+    methods: {
+        changeFn() {
+            this.num++;
+        },
+    },
+    components:{
+        // 注册组件
+        module
+    }
+})
+</script>
+</body>
+</html>

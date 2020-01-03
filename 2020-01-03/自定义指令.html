@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <p v-color="'red'">{{val}}</p>
+        </div>
+        <model></model>
+    </div>
+    <template id="model">
+         <div v-size="50">小猫热爱鱼</div>
+    </template>
+    <script src="./vue.js"></script>
+    <script>
+    // 全局注册
+    Vue.directive('color',function(el,val) {
+        el.style.color = val.value ? val.value : 'skyblue';
+    })
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            val:'我热爱vue',
+        },
+        components:{
+           model:{
+               template:'#model',
+               // 局部注册
+               directives:{
+                   size(el,val) {
+                       el.style.fontSize = val.value ? val.value + 'px' : '14px'; 
+                   }
+               }
+           }
+        }
+
+    })
+    </script>
+</body>
+</html>

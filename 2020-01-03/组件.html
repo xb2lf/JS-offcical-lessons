@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <first></first>
+        <br />
+        <second></second>
+        <br />
+        <third></third>
+    </div>
+    <template id="model">
+          <div>
+            <p>这是代表我的数字{{num}}</p>
+            <br />
+            <h2>{{txt}}</h2>
+          </div>
+    </template>
+    <script src="./vue.js"></script>
+    <script>
+     // 第一个全局注册的组件
+     const first =  {
+         template: `<div>
+            <p>第一个子组件</p>
+           <h2>{{msg}}</h2>
+         </div>`,
+         data(){
+             return {
+                 msg:'看到没？我是第一个全局注册的子组件'
+             }
+         }
+     }
+    
+    //将first局部注册，并在局部组件内使用
+     const second = {
+         template:`<div>
+                 <p>第二个子组件</p>
+                 <h2>{{info}}</h2>
+                 <br />
+                 <first>看到没？我还是第一个全局注册子组件</first>
+                 <br />
+         </div>`,
+         components:{
+             //局部注册的只能在局部组件中使用
+             first
+         },
+         data() {
+             return {
+                 info:'看到没？我是第一个拥有了局部注册的子组件'
+             }
+         }
+     }
+
+     //第二个全局注册的子组件
+     const third = {
+         template:'#model',
+         data(){
+            return {
+                num:222,
+                txt:'看到没？我是全局注册的第二个子组件'
+            }
+         }
+     }
+     Vue.component('first',first);//全局注册在哪里用都可以
+     Vue.component('second',second);
+     Vue.component('third',third);
+     new Vue({
+         el:"#app",
+
+     })
+    </script>
+</body>
+</html>

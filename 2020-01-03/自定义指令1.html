@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <input type="text" v-focus value="老猫枕咸鱼">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    // 全局注册
+    //方案一
+    // Vue.directive('focus',{
+    //    bind(el) {
+    //     Vue.nextTick(() => {
+    //         el.select();
+    //     })
+    //    }
+    // })
+
+   // 方案二
+    Vue.directive('focus',{
+       inserted(el) {
+            el.select();
+       }
+    })
+
+
+    new Vue({
+        el:'#app',
+    })
+    </script>
+</body>
+</html>
