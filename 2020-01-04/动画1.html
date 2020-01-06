@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 20px;
+            height: 20px;
+            background-color: skyblue;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="onoff = !onoff">点击</button>
+        <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+            <chil v-show="onoff"></chil>
+        </transition>
+    </div>
+    <template id="chil">
+        <div id="box"></div>
+    </template>
+    <script src="./vue.js"></script>
+    <script>
+        const chil = {
+            template: '#chil'
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                onoff: false,
+                onoff2: false,
+            },
+            methods:{
+            beforeEnter(ele){
+                ele.style.opacity = '1';
+                ele.style.transform = 'translate(0,0)';
+            },
+            enter(ele,done){
+                ele.offsetTop;// dom元素刚生成未能即使渲染，导致过度失效，所以主动触发页面回流（重绘），刷新DOM；更改 offsetTop、offsetLeft、 offsetWidth、offsetHeight；scrollTop、scrollLeft、scrollWidth、scrollHeight；clientTop、clientLeft、clientWidth、clientHeight；getComputedStyle() 、currentStyle（）。这些都会触发回流。回流导致DOM重新渲染，平时要尽可能避免，但这里，为了动画即时生效播放，则主动触发回流，刷新DOM。
+                ele.style.transition = '.5s';
+                ele.style.transform = 'translate(200px,400px)';
+                done();
+            },
+            afterEnter(ele){
+                ele.style.opacity = '0';
+                this.onoff = false;
+            }
+        },
+            components: {
+                chil,
+            }
+        })
+    </script>
+</body>
+
+</html>

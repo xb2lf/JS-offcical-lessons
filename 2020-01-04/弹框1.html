@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .shadow {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: rgba(0, 0, 0, .5);
+        }
+
+        /* .tk-box {
+            position: relative;
+        } */
+
+        #box {
+            width: 400px;
+            height: 200px;
+            border-radius: 20px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            /* align-items: flex-end; */
+            position: absolute;
+            z-index: 99999;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+            margin: auto;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+        }
+
+        .btns {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .txt {
+            width: 300px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="changeOnoff">点击</button>
+        <transition name="n" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
+            @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
+            <!-- appear - boolean，是否在初始渲染时使用过渡。默认为 false。 -->
+            <chil v-show="onoff" :chiloff='onoff' @conff="changeOnoff">
+                <template slot="content">
+                    <p>Hello</p>
+                    <p>This is beautiful world!</p>
+                </template>
+            </chil>
+        </transition>
+        <div class="shadow" v-show="onoff"></div>
+    </div>
+    <template id="chil">
+        <div class="tk-box">
+            <div id="box">
+                <div class="txt">
+                    <slot name="content"></slot>
+                </div>
+                <div class="btns">
+                    <button @click="off">确定</button>
+                    <button @click="off">取消</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script src="./vue.js"></script>
+    <script>
+        const chil = {
+            template: '#chil',
+            props: ['chiloff'],
+            methods: {
+                off() {
+                    this.$emit('conff');
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                onoff: false,
+            },
+            methods: {
+                changeOnoff() {
+                    this.onoff = !this.onoff;
+                },
+                beforeEnter(ele) {
+                    ele.style.position = 'relative';
+                    ele.style.zIndex = 999;
+                    ele.style.transiton = '.5s';
+                    ele.style.transform = 'translateY(0)';
+                },
+                enter(ele) {
+                    ele.style.zIndex = 999;
+                    ele.offsetLeft;// dom元素刚生成未能即使渲染，导致过度失效，所以主动触发页面回流（重绘），刷新DOM；更改 offsetTop、offsetLeft、 offsetWidth、offsetHeight；scrollTop、scrollLeft、scrollWidth、scrollHeight；clientTop、clientLeft、clientWidth、clientHeight；getComputedStyle() 、currentStyle（）。这些都会触发回流。回流导致DOM重新渲染，平时要尽可能避免，但这里，为了动画即时生效播放，则主动触发回流，刷新DOM。
+                    ele.style.transition = '.5s';
+                    ele.style.transform = 'translateY(200px)';
+                },
+                afterEnter(ele) {
+
+                },
+                beforeLeave(ele) {
+                    ele.style.position = 'relative';
+                    ele.style.zIndex = 999;
+                    ele.style.transform = 'translateY(200px)';
+                },
+                leave(ele) {
+                    ele.offsetLeft;
+                    ele.style.transition = '.5s';
+                    ele.style.transform = 'translateY(-200px)';
+                },
+                afterLeave(ele) {
+
+                }
+            },
+            components: {
+                chil
+            }
+        })
+    </script>
+</body>
+
+</html>

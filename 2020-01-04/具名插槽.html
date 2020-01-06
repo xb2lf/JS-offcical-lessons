@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <chil>
+            <div slot="footer">我有八只脚</div>
+            <div slot="body">我身长八丈</div>
+            <div slot="head">我有九颗头颅</div>
+        </chil>
+    </div>
+    <template id="chil">
+        <div>
+            <slot name="head">
+                <div class="head">头部</div>
+            </slot>
+            <slot name="body">
+                <div class="body">身体</div>
+            </slot>
+            <slot name="footer">
+                <div class="footer">脚</div>
+            </slot>
+        </div>
+    </template>
+    <script src="./vue.js"></script>
+    <script>
+        const chil = {
+            template: '#chil',
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                chil,
+            }
+        })
+    </script>
+</body>
+
+</html>
